@@ -13,7 +13,7 @@ var projectile_container: Node2D
 
 func _ready() -> void:
 	create_runtime_containers()
-	spawn_tower(Vector2(0, 0))
+	spawn_tower(Vector2(-100, 50))
 
 func create_runtime_containers() -> void:
 	tower_container = create_container("TowerContainer")

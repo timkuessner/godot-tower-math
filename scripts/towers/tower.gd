@@ -7,15 +7,27 @@ signal tower_clicked(tower: Tower)
 @export var function_speed: float = 10.0
 @export var enemies_per_function: int = 1
 
+var function: Function = Function.new()
+
 var function_text: String = "":
 	set(value):
 		function_text = value
-		print("Function: " + value)
+		function.set_text(value)
+		queue_redraw()
 
 @export var projectile: PackedScene
 
-func draw() -> void:
-	pass
+func _draw() -> void:
+	if Globals.game_state != Globals.GameState.CREATE_FUNCTIONS:
+		return
+	
+	if function == null:
+		return
+	
+	var points := function.sample(0.0, function_size, 200)
+	
+	if points.size() >= 2:
+		draw_polyline(points, Color.WHITE, 2, true)
 
 
 func shoot() -> void:
