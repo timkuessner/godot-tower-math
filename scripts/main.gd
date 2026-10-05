@@ -8,6 +8,7 @@ enum GameState {
 }
 
 @onready var level_container: Node = $LevelContainer
+@onready var tower_editor: Control = $UI/TowerEditor
 
 var current_level: Level
 var current_level_number := 1
@@ -30,6 +31,11 @@ func load_level(level_number: int) -> void:
 	
 	current_level = level_scene.instantiate()
 	level_container.add_child(current_level)
+	
+	current_level.tower_selected.connect(on_tower_selected)
+
+func on_tower_selected(tower: Tower) -> void:
+	tower_editor.edit_tower(tower)
 
 func start_function_creation() -> void:
 	game_state = GameState.CREATE_FUNCTIONS

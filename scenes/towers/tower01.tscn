@@ -2,7 +2,21 @@
 
 [ext_resource type="Script" uid="uid://diobth0jyjl6r" path="res://scripts/towers/tower.gd" id="1_camsk"]
 [ext_resource type="PackedScene" uid="uid://blp7yyhnaxcir" path="res://scenes/projectiles/projectile01.tscn" id="2_0rvdr"]
+[ext_resource type="Texture2D" uid="uid://dsvbc4nbeopkr" path="res://icon.svg" id="3_xmj8s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k5pq1"]
+radius = 64.93843
 
 [node name="Tower" type="Node2D" unique_id=894846402]
 script = ExtResource("1_camsk")
 projectile = ExtResource("2_0rvdr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=105398292]
+texture = ExtResource("3_xmj8s")
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=847376116]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=448758973]
+shape = SubResource("CircleShape2D_k5pq1")
+
+[connection signal="input_event" from="ClickArea" to="." method="_on_click_area_input_event"]
