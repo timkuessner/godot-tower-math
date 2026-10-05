@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cl134jwif1dl5"]
+
+[ext_resource type="Script" uid="uid://bmma8rw7rcmgj" path="res://scripts/main.gd" id="1_o5qli"]
+
+[node name="Main" type="Node" unique_id=57033171]
+script = ExtResource("1_o5qli")
+
+[node name="LevelContainer" type="Node" parent="." unique_id=231928737]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=404488980]

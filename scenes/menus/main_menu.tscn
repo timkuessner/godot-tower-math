@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://c7krsr5f4any6"]
+
+[ext_resource type="Script" uid="uid://b677fmku6g370" path="res://scripts/menus/main_menu.gd" id="1_xqga4"]
+
+[node name="MainMenu" type="Control" unique_id=1873854004]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xqga4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1140282612]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=302092022]
+layout_mode = 2
+text = "Play
+"
+
+[node name="OptionButton" type="Button" parent="VBoxContainer" unique_id=1585109783]
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=909410970]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
