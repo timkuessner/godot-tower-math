@@ -28,7 +28,7 @@ func _draw() -> void:
 	if !function.is_valid:
 		return
 	
-	projectile_path = function.create_path(function_length)
+	projectile_path = function.create_path(function_length, -0.1) # l ist immer positiv, schrittweite kann bei Richtungswechsel negativ sein
 	
 	if projectile_path.size() >= 2:
 		draw_polyline(projectile_path, Color.WHITE, 2, true)
