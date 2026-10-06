@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://crerpupghcbfr"]
+
+[ext_resource type="Script" uid="uid://bqtqcxj5da2lj" path="res://scripts/enemy/enemy.gd" id="1_a3pup"]
+[ext_resource type="Texture2D" uid="uid://dshpx3usimvl6" path="res://assets/enemies/tilemap-characters_packed.png" id="1_pgpww"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31ocp"]
+atlas = ExtResource("1_pgpww")
+region = Rect2(144, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayqi8"]
+atlas = ExtResource("1_pgpww")
+region = Rect2(168, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctrou"]
+atlas = ExtResource("1_pgpww")
+region = Rect2(192, 48, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ietdp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31ocp")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ayqi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctrou")
+}],
+"loop": 2,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="enemy" type="PathFollow2D" unique_id=657380412]
+rotation = -1.5707964
+rotates = false
+loop = false
+script = ExtResource("1_a3pup")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=196799970]
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_ietdp")
+autoplay = "default"
