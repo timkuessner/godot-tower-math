@@ -28,25 +28,20 @@ func _draw() -> void:
 	if !function.is_valid:
 		return
 	
-	var projectile_path = function.create_path(function_length)
-	
-	print(projectile_path)
+	projectile_path = function.create_path(function_length)
 	
 	if projectile_path.size() >= 2:
 		draw_polyline(projectile_path, Color.WHITE, 2, true)
-	
-	print(projectile_path)
 	
 	shoot()
 
 
 func shoot() -> void:
-	print(projectile_path)
 	projectile = projectile_scene.instantiate()
 	
 	add_child(projectile)
 	
-	projectile.setup(projectile_path, function_length)
+	projectile.setup(projectile_path)
 
 
 func _on_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

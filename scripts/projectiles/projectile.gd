@@ -5,25 +5,18 @@ extends Node2D
 
 var path: PackedVector2Array
 var distance: float = 0.0
-var length: float = 0.0
 
 
-func setup(p: PackedVector2Array, l: float) -> void:
+func setup(p: PackedVector2Array) -> void:
 	path = p
-	length = l
 	distance = 0.0
 
 
 func _process(delta: float) -> void:
-	print(path.size())
 	if path.size() < 2:
 		return
 	
 	distance += speed * delta
-	
-	if distance >= length:
-		queue_free()
-		return
 	
 	var remaining_distance := distance
 	
@@ -36,3 +29,5 @@ func _process(delta: float) -> void:
 			return
 		
 		remaining_distance -= segment_length
+	
+	queue_free()
