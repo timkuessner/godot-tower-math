@@ -9,11 +9,11 @@ signal tower_clicked(tower: Tower)
 
 @export var projectile_scene: PackedScene
 
-var projectile: Projectile
+#var projectile: Projectile
 
 var function: Function = Function.new()
 
-var projectile_path: Curve2D
+var projectile_path: PackedVector2Array
 
 var function_text: String = "":
 	set(value):
@@ -28,18 +28,14 @@ func _draw() -> void:
 	if function == null:
 		return
 	
-	var projectile_path = function.create_curve(function_size)
+	var projectile_path = function.create_path(function_size)
 	
-	if projectile_path.get_baked_points().size() >= 2:
-		draw_polyline(projectile_path.get_baked_points(), Color.WHITE, 2, true)
+	if projectile_path.size() >= 2:
+		draw_polyline(projectile_path, Color.WHITE, 2, true)
 
 
 func shoot() -> void:
-	projectile = projectile_scene.instantiate()
-	
-	add_child(projectile)
-	
-	projectile.setup(projectile_path)
+	pass
 
 
 func _on_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
