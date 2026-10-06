@@ -7,6 +7,10 @@ signal tower_clicked(tower: Tower)
 @export var function_speed: float = 10.0
 @export var enemies_per_function: int = 1
 
+@export var projectile_scene: PackedScene
+
+var projectile: Projectile
+
 var function: Function = Function.new()
 
 var projectile_path: Curve2D
@@ -16,8 +20,6 @@ var function_text: String = "":
 		function_text = value
 		function.set_text(value)
 		queue_redraw()
-
-@export var projectile: PackedScene
 
 func _draw() -> void:
 	if Globals.game_state != Globals.GameState.CREATE_FUNCTIONS:
@@ -33,7 +35,11 @@ func _draw() -> void:
 
 
 func shoot() -> void:
-	pass
+	projectile = projectile_scene.instantiate()
+	
+	add_child(projectile)
+	
+	projectile.setup(projectile_path)
 
 
 func _on_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

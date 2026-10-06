@@ -26,13 +26,13 @@ func evaluate(x: float) -> float:
 func point_at(x: float) -> Vector2:
 	return Vector2(x, evaluate(x))
 
-func create_curve(size: float) -> Curve2D:
-	var curve := Curve2D.new()
+func create_path(size: float) -> PackedVector2Array:
+	var path := PackedVector2Array()
 	
 	for i in range(STEPS + 1):
 		var x := lerpf(0, size, float(i)/STEPS)
 		var y := evaluate(x) * 10
 		
 		if not is_nan(y) and not is_inf(y):
-			curve.add_point(Vector2i(x, -y))
-	return curve
+			path.append(Vector2i(x, -y))
+	return path
