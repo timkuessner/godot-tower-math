@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bcqe18cv76iyy"]
+
+[ext_resource type="Script" uid="uid://dx2tmjgk0c2ve" path="res://scripts/ui/tower_editor/tower_editor.gd" id="1_qbch3"]
+
+[node name="TowerEditor" type="Control" unique_id=1626452609]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_qbch3")
+
+[node name="Panel" type="Panel" parent="." unique_id=461410670]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="HBoxContainer" parent="Panel" unique_id=1309981572]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FunctionSize" type="Label" parent="Panel/Container" unique_id=1836583523]
+layout_mode = 2
+text = "x"
+
+[node name="FunctionSpeed" type="Label" parent="Panel/Container" unique_id=77139441]
+layout_mode = 2
+
+[node name="EnemiesPerFunction" type="Label" parent="Panel/Container" unique_id=1111101608]
+layout_mode = 2
+
+[node name="FunctionInput" type="LineEdit" parent="Panel/Container" unique_id=1465110854]
+layout_mode = 2
+
+[connection signal="text_changed" from="Panel/Container/FunctionInput" to="." method="_on_function_input_text_changed"]
