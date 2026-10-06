@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bqtqcxj5da2lj" path="res://scripts/enemy/enemy.gd" id="1_a3pup"]
 [ext_resource type="Texture2D" uid="uid://dshpx3usimvl6" path="res://assets/enemies/tilemap-characters_packed.png" id="1_pgpww"]
+[ext_resource type="Texture2D" uid="uid://7caynrwiv4c1" path="res://assets/enemies/Dunkelblaue Pixel-Textur für die Lebensleiste-2.png" id="3_tjssy"]
+[ext_resource type="Texture2D" uid="uid://04o4b17h4gc3" path="res://assets/enemies/Grüne Pixel-Lebensleiste-1.png" id="4_gl05p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_31ocp"]
 atlas = ExtResource("1_pgpww")
@@ -32,13 +34,39 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_kej8o"]
+radius = 49.0408
+
 [node name="enemy" type="PathFollow2D" unique_id=657380412]
-rotation = -1.5707964
 rotates = false
 loop = false
 script = ExtResource("1_a3pup")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=196799970]
-scale = Vector2(5, 5)
+scale = Vector2(5.0134077, 4.9816437)
 sprite_frames = SubResource("SpriteFrames_ietdp")
 autoplay = "default"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=2035396236]
+offset_left = -48.0
+offset_top = -62.000004
+offset_right = 2031.0
+offset_bottom = 694.0
+scale = Vector2(0.04964549, 0.047574893)
+value = 100.0
+texture_under = ExtResource("3_tjssy")
+texture_progress = ExtResource("4_gl05p")
+
+[node name="Hp_bar" type="ProgressBar" parent="." unique_id=808416500]
+offset_left = -37.000004
+offset_top = -48.0
+offset_right = -33.000004
+offset_bottom = -21.0
+scale = Vector2(0.41328073, 0.2869354)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=868907310]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1414388217]
+light_mask = 2
+visibility_layer = 2
+shape = SubResource("CircleShape2D_kej8o")
