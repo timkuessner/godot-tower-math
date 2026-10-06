@@ -42,4 +42,16 @@ layout_mode = 2
 [node name="FunctionInput" type="LineEdit" parent="Panel/Container" unique_id=1465110854]
 layout_mode = 2
 
+[node name="StartButton" type="Button" parent="Panel" unique_id=316481226]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -46.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Start"
+
 [connection signal="text_changed" from="Panel/Container/FunctionInput" to="." method="_on_function_input_text_changed"]
+[connection signal="pressed" from="Panel/StartButton" to="." method="_on_start_button_pressed"]

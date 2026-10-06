@@ -16,3 +16,7 @@ func edit_tower(tower: Tower) -> void:
 
 func _on_function_input_text_changed(new_text: String) -> void:
 	selected_tower.function_text = new_text
+
+
+func _on_start_button_pressed() -> void:
+	$"../..".start_playing()

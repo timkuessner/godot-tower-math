@@ -1,6 +1,8 @@
 class_name Function
 extends RefCounted
 
+const STEPS = 100
+
 var text: String = ""
 var is_valid: bool = false
 
@@ -18,18 +20,19 @@ func evaluate(x: float) -> float:
 	if !is_valid:
 		return NAN
 	
-	return x*x
+	return sin(x)
 
 
 func point_at(x: float) -> Vector2:
 	return Vector2(x, evaluate(x))
 
-
-func sample(start_x: float, size: float, steps: int = 100) -> PackedVector2Array:
-	var points := PackedVector2Array()
-	for i in range(steps + 1):
-		var x := lerpf(start_x, start_x + size, float(i) / steps) * 10
-		var y := evaluate(x) / 10
+func create_curve(size: float) -> Curve2D:
+	var curve := Curve2D.new()
+	
+	for i in range(STEPS + 1):
+		var x := lerpf(0, size, float(i)/STEPS)
+		var y := evaluate(x) * 10
+		
 		if not is_nan(y) and not is_inf(y):
-			points.append(Vector2(x, -y))
-	return points
+			curve.add_point(Vector2i(x, -y))
+	return curve

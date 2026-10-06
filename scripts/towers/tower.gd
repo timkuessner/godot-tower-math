@@ -9,6 +9,8 @@ signal tower_clicked(tower: Tower)
 
 var function: Function = Function.new()
 
+var projectile_path: Curve2D
+
 var function_text: String = "":
 	set(value):
 		function_text = value
@@ -24,10 +26,10 @@ func _draw() -> void:
 	if function == null:
 		return
 	
-	var points := function.sample(0.0, function_size, 200)
+	var projectile_path = function.create_curve(function_size)
 	
-	if points.size() >= 2:
-		draw_polyline(points, Color.WHITE, 2, true)
+	if projectile_path.get_baked_points().size() >= 2:
+		draw_polyline(projectile_path.get_baked_points(), Color.WHITE, 2, true)
 
 
 func shoot() -> void:
