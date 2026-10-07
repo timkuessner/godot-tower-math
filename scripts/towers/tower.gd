@@ -3,7 +3,7 @@ extends Node2D
 
 signal tower_clicked(tower: Tower)
 
-@export var function_length: float = 100.0
+@export var function_length: float = 1000.0
 @export var function_speed: float = 10.0
 @export var enemies_per_function: int = 1
 
