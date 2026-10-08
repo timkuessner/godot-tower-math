@@ -8,7 +8,6 @@ var current_level_number := 1
 
 var base_hp: int
 @export var base_max_hp: int = 10
-@export var enemy_base_damage: int = 1
 @onready var base_hp_bar: Range = $Base_hp_bar
 
 
@@ -92,7 +91,7 @@ func _on_goal_area_entered(area: Area2D) -> void:
 	if enemy.is_queued_for_deletion():
 		return
 
-	base_hp = maxi(base_hp - enemy.hp, 0)
+	base_hp = maxi(base_hp - enemy.hp/5, 0)
 	base_hp_bar.value = base_hp
 
 	# Angekommenen Enemy entfernen
