@@ -64,7 +64,7 @@ offset_bottom = 26.999996
 scale = Vector2(0.41328073, 0.2869354)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=868907310]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1414388217]

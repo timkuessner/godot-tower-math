@@ -9,6 +9,8 @@ extends PathFollow2D
 
 func _ready() -> void:
 	loop = false
+	add_to_group("enemies")
+	
 
 	hp_bar.max_value = hp
 	hp_bar.value = hp

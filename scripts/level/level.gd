@@ -45,11 +45,8 @@ func spawn_tower(position: Vector2) -> Tower:
 
 func on_tower_selected(tower: Tower):
 	tower_selected.emit(tower)
-	
-	
+
 
 func spawn_enemy():
 	var enemy = ENEMY_SCENE.instantiate()
 	path.add_child(enemy)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
