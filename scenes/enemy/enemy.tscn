@@ -38,6 +38,7 @@ animations = [{
 radius = 49.0408
 
 [node name="enemy" type="PathFollow2D" unique_id=657380412]
+position = Vector2(30, -15)
 rotates = false
 loop = false
 script = ExtResource("1_a3pup")
@@ -58,13 +59,13 @@ texture_under = ExtResource("3_tjssy")
 texture_progress = ExtResource("4_gl05p")
 
 [node name="Hp_bar" type="ProgressBar" parent="." unique_id=808416500]
-offset_left = -37.000004
-offset_top = -48.0
-offset_right = -33.000004
-offset_bottom = -21.0
+offset_right = 3.9999962
+offset_bottom = 26.999996
 scale = Vector2(0.41328073, 0.2869354)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=868907310]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1414388217]
 light_mask = 2

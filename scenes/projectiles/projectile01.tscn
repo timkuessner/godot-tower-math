@@ -3,9 +3,27 @@
 [ext_resource type="Script" uid="uid://c45vmrbmd1ian" path="res://scripts/projectiles/projectile.gd" id="1_ih5rc"]
 [ext_resource type="Texture2D" uid="uid://dsvbc4nbeopkr" path="res://icon.svg" id="2_lt0t6"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kej8o"]
+size = Vector2(130.00003, 130.00003)
+
 [node name="Projectile1" type="Node2D" unique_id=916805144]
+light_mask = 2
+visibility_layer = 2
 script = ExtResource("1_ih5rc")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=648682641]
+light_mask = 2
+visibility_layer = 2
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_lt0t6")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=250450778]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=1848872446]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(-1.6940659e-21, 6.7762636e-21)
+scale = Vector2(0.9999995, 0.9999995)
+shape = SubResource("RectangleShape2D_kej8o")

@@ -4,37 +4,49 @@ extends PathFollow2D
 @export var hp: int = 10
 
 @onready var hp_bar: ProgressBar = $Hp_bar
-
 @onready var texture_progress_bar: TextureProgressBar = $TextureProgressBar
-@onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
+
 
 func _ready() -> void:
-	connect_signal()
-	
-	
+	loop = false
+
 	hp_bar.max_value = hp
-	hp_bar.value = hp_bar.max_value
-	
-func connect_signal() -> void:
-	$Area2D.connect("body_entered", decrease_life_points)
-	texture_progress_bar.connect("value_changed", healhthbar_change)
-	
+	hp_bar.value = hp
+
+	texture_progress_bar.max_value = hp
+	texture_progress_bar.value = hp
+
+	$Area2D.area_entered.connect(_on_projectile_entered)
+
+
 func _process(delta: float) -> void:
 	progress += delta * speed
-	
-	# Hp Bar
+
+	# HP-Leiste waagerecht über dem Enemy halten
 	hp_bar.rotation = -global_rotation
 	hp_bar.global_position = global_position + Vector2(-20, -30)
-	
-	if progress_ratio >= 1: #End of the path
-		queue_free() #Kill
-		
-func healhthbar_change(value: float) -> void:
-	if value == 0:
+
+	if progress_ratio >= 1.0:
 		queue_free()
 
+
+func _on_projectile_entered(area: Area2D) -> void:
+	# Dein Aufbau: Projektil → Sprite2D → Area2D
+	var projectile = area.get_parent().get_parent()
+
+	if projectile is Projectile:
+		if projectile.is_queued_for_deletion():
+			return
+
+		decrease_life_points(3)
+		projectile.queue_free()	
+
+
 func decrease_life_points(amount: int) -> void:
-	hp -= amount
-	texture_progress_bar.value -= amount
+	hp = maxi(hp - amount, 0)	
+
+	hp_bar.value = hp
+	texture_progress_bar.value = hp
+
 	if hp <= 0:
 		queue_free()

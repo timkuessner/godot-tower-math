@@ -2,5 +2,20 @@
 
 [ext_resource type="Script" uid="uid://xn842hsfcnx6" path="res://scripts/level/level.gd" id="1_3n7h2"]
 
+[sub_resource type="Curve2D" id="Curve2D_3n7h2"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 72, 573, 0, 0, 0, 0, 215, 572, 0, 0, 0, 0, 211, 75, 0, 0, 0, 0, 595, 75, 0, 0, 0, 0, 594, 265, 0, 0, 0, 0, 343, 267, 0, 0, 0, 0, 345, 464, 0, 0, 0, 0, 847, 466, 0, 0, 0, 0, 844, 133, 0, 0, 0, 0, 1108, 128)
+}
+point_count = 10
+
 [node name="Levels01" type="Node2D" unique_id=728506507]
 script = ExtResource("1_3n7h2")
+
+[node name="enemy1_spawn" type="Node" parent="." unique_id=994195046]
+
+[node name="Path2D" type="Path2D" parent="enemy1_spawn" unique_id=887783084]
+position = Vector2(-525, -307)
+curve = SubResource("Curve2D_3n7h2")
+
+[node name="SpawnTimer" type="Timer" parent="enemy1_spawn" unique_id=455898955]
+autostart = true
