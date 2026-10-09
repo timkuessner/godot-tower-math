@@ -21,6 +21,9 @@ Globals="*uid://cw7wg3d4v5cos"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/mode=2
 window/stretch/mode="canvas_items"
 
 [physics]
