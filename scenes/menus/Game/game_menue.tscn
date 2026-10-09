@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://bf5yd53woqnrm"]
+
+[ext_resource type="PackedScene" uid="uid://gybkn127jo73" path="res://scenes/menus/Game/tower_ui.tscn" id="1_4n28k"]
+[ext_resource type="Script" uid="uid://c2salx8tdtdfj" path="res://scripts/ui/GameMenue/game_menue.gd" id="1_idmre"]
+
+[node name="gameMenue" type="Control" unique_id=468380503]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_idmre")
+
+[node name="SideBar" type="Panel" parent="." unique_id=418483447]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -343.0
+offset_top = -360.0
+offset_bottom = 360.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Margin" type="Control" parent="SideBar" unique_id=135770263]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="Label" parent="SideBar/Margin" unique_id=1659933859]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -3.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Towers"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="SideBar/Margin" unique_id=1279263741]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.060000002
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.19999695
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="TowerUI" parent="SideBar/Margin/GridContainer" unique_id=1825779563 instance=ExtResource("1_4n28k")]
+layout_mode = 2
+
+[node name="TowerUI2" parent="SideBar/Margin/GridContainer" unique_id=79977554 instance=ExtResource("1_4n28k")]
+layout_mode = 2
+
+[node name="TowerUI3" parent="SideBar/Margin/GridContainer" unique_id=1851530958 instance=ExtResource("1_4n28k")]
+layout_mode = 2
+
+[node name="TowerUI4" parent="SideBar/Margin/GridContainer" unique_id=328170218 instance=ExtResource("1_4n28k")]
+layout_mode = 2
+
+[connection signal="pressed" from="SideBar/Margin/GridContainer/TowerUI" to="." method="onTowerUIPressed" binds= [0]]
+[connection signal="pressed" from="SideBar/Margin/GridContainer/TowerUI2" to="." method="onTowerUIPressed" binds= [1]]
+[connection signal="pressed" from="SideBar/Margin/GridContainer/TowerUI3" to="." method="onTowerUIPressed" binds= [2]]
+[connection signal="pressed" from="SideBar/Margin/GridContainer/TowerUI4" to="." method="onTowerUIPressed" binds= [3]]

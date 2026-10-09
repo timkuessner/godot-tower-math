@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bmma8rw7rcmgj" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://bcqe18cv76iyy" path="res://scenes/ui/tower_editor/tower_editor.tscn" id="2_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://7caynrwiv4c1" path="res://assets/enemies/Dunkelblaue Pixel-Textur für die Lebensleiste-2.png" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://bf5yd53woqnrm" path="res://scenes/menus/Game/game_menue.tscn" id="3_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://04o4b17h4gc3" path="res://assets/enemies/Grüne Pixel-Lebensleiste-1.png" id="4_tbgi4"]
 
 [node name="Main" type="Node" unique_id=57033171]
@@ -18,6 +19,8 @@ position = Vector2(-71, 57)
 [node name="TowerEditor" parent="UI" unique_id=1626452609 instance=ExtResource("2_0wfyh")]
 visible = false
 
+[node name="gameMenue" parent="UI" unique_id=468380503 instance=ExtResource("3_tbgi4")]
+
 [node name="Base_hp_bar" type="TextureProgressBar" parent="." unique_id=331586671]
 offset_left = -654.00006
 offset_top = -295.0
@@ -27,3 +30,5 @@ scale = Vector2(0.10329147, 0.15521367)
 value = 100.0
 texture_under = ExtResource("3_jyhfs")
 texture_progress = ExtResource("4_tbgi4")
+
+[connection signal="towerSelected" from="UI/gameMenue" to="." method="onTowerSelected"]

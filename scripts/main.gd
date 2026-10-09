@@ -100,3 +100,11 @@ func _on_goal_area_entered(area: Area2D) -> void:
 	if base_hp == 0:
 		lose_level()
   
+var selected: int = -1
+
+func onTowerSelected(index: int) -> void:
+	if selected!=index:
+		selected = index
+	else:
+		selected = -1
+	print(selected)
