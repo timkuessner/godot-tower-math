@@ -32,4 +32,13 @@ curve = SubResource("Curve2D_3n7h2")
 [node name="SpawnTimer" type="Timer" parent="enemy1_spawn" unique_id=455898955]
 autostart = true
 
+[node name="TowerPlacementBorders" type="Node2D" parent="." unique_id=1323167756]
+
+[node name="TowerPlacementBorder" type="Area2D" parent="TowerPlacementBorders" unique_id=1278313693]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TowerPlacementBorders/TowerPlacementBorder" unique_id=1186552030]
+polygon = PackedVector2Array(-464, 288, -288, 288, -288, -208, 48, -208, 48, -64, -200, -64, -200, 184, 344, 184, 344, -152, 592, -152, 592, -208, 296, -208, 296, 128, -160, 128, -160, -24, 88, -24, 88, -256, -336, -256, -336, 240, -464, 240)
+
 [connection signal="body_entered" from="GoalArea" to="." method="_on_base_body_entered"]

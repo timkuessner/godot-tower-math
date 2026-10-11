@@ -16,6 +16,9 @@ var base_hp: int
 
 func _ready() -> void:
 	start_game()
+	ghostTower.visible = false
+	current_level.add_child(ghostTower)
+
 	
 func start_game() -> void:
 	load_level(current_level_number)
@@ -101,6 +104,7 @@ func _on_goal_area_entered(area: Area2D) -> void:
 		lose_level()
   
 var selected: int = -1
+var ghostTower: Node2D = load("res://scenes/towers/ghost_tower.tscn").instantiate()
 
 func onTowerSelected(index: int) -> void:
 	if selected!=index:
@@ -108,3 +112,22 @@ func onTowerSelected(index: int) -> void:
 	else:
 		selected = -1
 	print(selected)
+
+func _process(_delta: float) -> void:
+	var show := selected != -1 and get_viewport().gui_get_hovered_control() == null
+	ghostTower.visible = show
+	if show:
+		ghostTower.global_position = current_level.get_global_mouse_position()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not ghostTower.visible:
+		return
+	if not (event is InputEventMouseButton and event.pressed):
+		return
+	if event.button_index == MOUSE_BUTTON_LEFT and ghostTower.isValid:
+		current_level.spawn_tower(current_level.to_local(ghostTower.global_position))
+		selected = -1
+	elif event.button_index == MOUSE_BUTTON_RIGHT:
+		selected = -1
+	get_viewport().set_input_as_handled()
