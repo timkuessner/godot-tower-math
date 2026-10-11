@@ -16,7 +16,6 @@ var projectile_container: Node2D
 
 func _ready() -> void:
 	create_runtime_containers()
-	spawn_tower(Vector2(-100, 50))
 	$enemy1_spawn/SpawnTimer.timeout.connect(spawn_enemy)
 
 func create_runtime_containers() -> void:
@@ -32,7 +31,7 @@ func create_container(container_name: String) -> Node2D:
 	return container
 
 
-func spawn_tower(position: Vector2) -> Tower:
+func spawn_tower(position: Vector2, type: int) -> Tower:
 	var tower: Tower = TOWER_SCENE.instantiate()
 	
 	tower.position = position
@@ -40,6 +39,8 @@ func spawn_tower(position: Vector2) -> Tower:
 	tower_container.add_child(tower)
 	
 	tower.tower_clicked.connect(on_tower_selected)
+	
+	tower.setType(type)
 	
 	return tower
 

@@ -111,10 +111,10 @@ func onTowerSelected(index: int) -> void:
 		selected = index
 	else:
 		selected = -1
-	print(selected)
+	ghostTower.setType(selected)
 
 func _process(_delta: float) -> void:
-	var show := selected != -1 and get_viewport().gui_get_hovered_control() == null
+	var show := (selected != -1 and get_viewport().gui_get_hovered_control() == null)
 	ghostTower.visible = show
 	if show:
 		ghostTower.global_position = current_level.get_global_mouse_position()
@@ -126,7 +126,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventMouseButton and event.pressed):
 		return
 	if event.button_index == MOUSE_BUTTON_LEFT and ghostTower.isValid:
-		current_level.spawn_tower(current_level.to_local(ghostTower.global_position))
+		current_level.spawn_tower(current_level.to_local(ghostTower.global_position), selected)
 		selected = -1
 	elif event.button_index == MOUSE_BUTTON_RIGHT:
 		selected = -1

@@ -7,6 +7,8 @@ signal tower_clicked(tower: Tower)
 @export var function_speed: float = 10.0
 @export var enemies_per_function: int = 1
 
+var type: int = 0
+
 @export var projectile_scene: PackedScene
 
 var projectile: Projectile
@@ -41,6 +43,20 @@ func shoot() -> void:
 	
 	projectile.setup(projectile_path)
 
+var imagePaths := [
+	"res://assets/Tower/shooter.png",
+	"res://assets/Tower/slime.png",
+	"res://assets/Tower/bomber.png",
+	"res://assets/Tower/booster.png",
+	"res://assets/Tower/sniper.png",
+	"res://assets/Tower/mage.png",
+	]
+	
+func setType(index: int) -> void:
+	if (index==-1):
+		return
+	$ClickArea/Shooter.texture = load(imagePaths[index])
+	type = index
 
 func _on_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:

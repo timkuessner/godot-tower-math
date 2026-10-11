@@ -2,11 +2,15 @@ extends Control
 
 signal towerSelected(index: int)
 
-var tower = preload("res://scenes/towers/tower01.tscn")
+var towerScene = preload("res://scenes/menus/Game/tower_ui.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	for i in range(6):
+		var towerButton: Button = towerScene.instantiate()
+		towerButton.setType(i)
+		towerButton.pressed.connect(onTowerUIPressed.bind(i))
+		$SideBar/Margin/GridContainer.add_child(towerButton)	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

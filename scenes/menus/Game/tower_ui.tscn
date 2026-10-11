@@ -5,12 +5,36 @@
 [sub_resource type="GDScript" id="GDScript_fd5gr"]
 script/source = "extends Button
 
+var type: int = 0
 
+var imagePaths := [
+	\"res://assets/Tower/shooter.png\",
+	\"res://assets/Tower/slime.png\",
+	\"res://assets/Tower/bomber.png\",
+	\"res://assets/Tower/booster.png\",
+	\"res://assets/Tower/sniper.png\",
+	\"res://assets/Tower/mage.png\",
+	]
+
+
+var tooltips := [
+	\"Shooter\\nA reliable all-rounder.\\nHits one enemy at a time.\\nMedium range and damage.\",
+	\"Slime\\nSlows enemies down.\\nHits several enemies at once.\\nDeals no damage.\",
+	\"Bomber\\nExplodes on the first hit.\\nHeavy damage to all\\nenemies nearby.\",
+	\"Booster\\nDoesn't attack enemies.\\nShoots your towers instead\\nand boosts them.\",
+	\"Sniper\\nExtreme range.\\nVery high damage to one enemy.\\nSlow to reload.\",
+	\"Mage\\nAn imaginary tower.\\nFades in and out and only\\nattacks while visible.\\nHuge range, area damage.\\nExpensive.\",
+	]
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-
+func setType(index: int) -> void:
+	icon = load(imagePaths[index])
+	tooltip_text = tooltips[index]
+	type = index
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

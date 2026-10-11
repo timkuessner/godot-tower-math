@@ -54,6 +54,7 @@ offset_top = -62.000004
 offset_right = 2031.0
 offset_bottom = 694.0
 scale = Vector2(0.04964549, 0.047574893)
+mouse_filter = 2
 value = 100.0
 texture_under = ExtResource("3_tjssy")
 texture_progress = ExtResource("4_gl05p")
@@ -62,6 +63,7 @@ texture_progress = ExtResource("4_gl05p")
 offset_right = 3.9999962
 offset_bottom = 26.999996
 scale = Vector2(0.41328073, 0.2869354)
+mouse_filter = 2
 
 [node name="Area2D" type="Area2D" parent="." unique_id=868907310]
 collision_layer = 4
