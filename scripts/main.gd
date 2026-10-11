@@ -8,7 +8,6 @@ var current_level_number := 1
 
 var base_hp: int
 @export var base_max_hp: int = 10
-@onready var base_hp_bar: Range = $Base_hp_bar
 
 
 
@@ -42,9 +41,8 @@ func load_level(level_number: int) -> void:
 	)
 
 	base_hp = base_max_hp
-	base_hp_bar.min_value = 0
-	base_hp_bar.max_value = base_max_hp
-	base_hp_bar.value = base_hp
+	$UI/gameMenue.setMaxHP(base_max_hp)
+	$UI/gameMenue.setHP(base_hp)
 	
 	start_function_creation()
 
@@ -95,7 +93,7 @@ func _on_goal_area_entered(area: Area2D) -> void:
 		return
 
 	base_hp = maxi(base_hp - enemy.hp/5, 0)
-	base_hp_bar.value = base_hp
+	$UI/gameMenue.setHP(base_hp)
 
 	# Angekommenen Enemy entfernen
 	enemy.queue_free()

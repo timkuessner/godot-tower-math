@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://bf5yd53woqnrm"]
 
+[ext_resource type="PackedScene" uid="uid://gybkn127jo73" path="res://scenes/menus/Game/tower_ui.tscn" id="1_4n28k"]
 [ext_resource type="Script" uid="uid://c2salx8tdtdfj" path="res://scripts/ui/GameMenue/game_menue.gd" id="1_idmre"]
+[ext_resource type="Texture2D" uid="uid://b07vquhr6yc0b" path="res://assets/Money.png" id="3_7irwq"]
+[ext_resource type="Texture2D" uid="uid://7caynrwiv4c1" path="res://assets/enemies/Dunkelblaue Pixel-Textur für die Lebensleiste-2.png" id="4_v122a"]
+[ext_resource type="Texture2D" uid="uid://04o4b17h4gc3" path="res://assets/enemies/Grüne Pixel-Lebensleiste-1.png" id="5_c3aj4"]
 
 [node name="gameMenue" type="Control" unique_id=468380503]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -14,46 +19,135 @@ script = ExtResource("1_idmre")
 
 [node name="SideBar" type="Panel" parent="." unique_id=418483447]
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = -1
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -343.0
-offset_top = -360.0
-offset_bottom = 360.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Margin" type="Control" parent="SideBar" unique_id=135770263]
+[node name="Margin" type="MarginContainer" parent="SideBar" unique_id=225941939]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="Header" type="Label" parent="SideBar/Margin" unique_id=1659933859]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_right = -3.0
-offset_bottom = 23.0
-grow_horizontal = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="SideBar/Margin" unique_id=1787646343]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="SideBar/Margin/VBoxContainer" unique_id=1659933859]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
 text = "Towers"
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="SideBar/Margin" unique_id=1279263741]
+[node name="Margin" type="Control" parent="SideBar/Margin/VBoxContainer" unique_id=846895512]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SideBar/Margin/VBoxContainer" unique_id=993885296]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="SideBar/Margin/VBoxContainer/ScrollContainer" unique_id=1279263741]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="TowerUI2" parent="SideBar/Margin/VBoxContainer/ScrollContainer/GridContainer" unique_id=1825779563 instance=ExtResource("1_4n28k")]
+layout_mode = 2
+
+[node name="TowerUI" parent="SideBar/Margin/VBoxContainer/ScrollContainer/GridContainer" unique_id=79252420 instance=ExtResource("1_4n28k")]
+layout_mode = 2
+
+[node name="UpperLeft" type="Control" parent="." unique_id=104370842]
+anchors_preset = 0
+offset_right = 682.0
+offset_bottom = 283.0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UpperLeft" unique_id=887161294]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.060000002
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 0.19999695
 grow_horizontal = 2
 grow_vertical = 2
-columns = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpperLeft/MarginContainer" unique_id=1851161680]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpperLeft/MarginContainer/VBoxContainer" unique_id=1611061844]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Base_hp_bar" type="TextureProgressBar" parent="UpperLeft/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1023059078]
+custom_minimum_size = Vector2(100, 41.975)
+layout_mode = 2
+mouse_filter = 2
+value = 98.0
+nine_patch_stretch = true
+texture_under = ExtResource("4_v122a")
+texture_progress = ExtResource("5_c3aj4")
+
+[node name="Label" type="Label" parent="UpperLeft/MarginContainer/VBoxContainer" unique_id=1503958654]
+layout_mode = 2
+text = "0"
+
+[node name="LowerLeft" type="Control" parent="." unique_id=1053960540]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -283.0
+offset_right = 682.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="LowerLeft" unique_id=1669148986]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LowerLeft/MarginContainer" unique_id=1334182697]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="LowerLeft/MarginContainer/VBoxContainer" unique_id=546473493]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="LowerLeft/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=555843866]
+layout_mode = 2
+text = "100/100"
+
+[node name="TextureRect" type="TextureRect" parent="LowerLeft/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1652448763]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_7irwq")
+expand_mode = 1
+stretch_mode = 5
