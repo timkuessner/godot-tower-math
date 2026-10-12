@@ -9,6 +9,7 @@ signal tower_clicked(tower: Tower)
 
 var type: int = 0
 
+
 @export var projectile_scene: PackedScene
 
 var projectile: Projectile
@@ -44,12 +45,15 @@ func shoot() -> void:
 	projectile.setup(projectile_path)
 	
 func setType(index: int) -> void:
+	type = index
 	if (index==-1):
 		return
 	var data: Dictionary = Globals.towers[index]
 	var texture: Texture2D = load(data["texture"])
 	$ClickArea/Shooter.texture = texture
-	type = index
+	function_length = data["range"]
+	function_speed = data["projectile_speed"]
+	enemies_per_function = data["max_targets"]
 
 func _on_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:

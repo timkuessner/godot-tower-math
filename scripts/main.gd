@@ -10,7 +10,7 @@ var current_level_number := 1
 var towers: Array = []
 
 func _ready() -> void:
-	Globals.money = 150
+	Globals.money = 500
 	Globals.maxHP = 10
 	start_game()
 	ghostTower.visible = false
