@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bf5yd53woqnrm"]
 
-[ext_resource type="PackedScene" uid="uid://gybkn127jo73" path="res://scenes/menus/Game/tower_ui.tscn" id="1_4n28k"]
-[ext_resource type="Script" uid="uid://c2salx8tdtdfj" path="res://scripts/ui/GameMenue/game_menue.gd" id="1_idmre"]
+[ext_resource type="PackedScene" uid="uid://gybkn127jo73" path="res://scenes/menus/Game/TowerButton.tscn" id="1_4n28k"]
+[ext_resource type="Script" uid="uid://c2salx8tdtdfj" path="res://scripts/ui/GameMenue/gameUI.gd" id="1_idmre"]
 [ext_resource type="Texture2D" uid="uid://b07vquhr6yc0b" path="res://assets/Money.png" id="3_7irwq"]
 [ext_resource type="Texture2D" uid="uid://7caynrwiv4c1" path="res://assets/enemies/Dunkelblaue Pixel-Textur für die Lebensleiste-2.png" id="4_v122a"]
 [ext_resource type="Texture2D" uid="uid://04o4b17h4gc3" path="res://assets/enemies/Grüne Pixel-Lebensleiste-1.png" id="5_c3aj4"]
@@ -142,7 +142,7 @@ mouse_filter = 2
 
 [node name="Label" type="Label" parent="LowerLeft/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=555843866]
 layout_mode = 2
-text = "100/100"
+text = "100"
 
 [node name="TextureRect" type="TextureRect" parent="LowerLeft/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1652448763]
 custom_minimum_size = Vector2(20, 0)

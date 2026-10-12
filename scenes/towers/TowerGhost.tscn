@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b8dxmpr30eanx"]
 
-[ext_resource type="Script" uid="uid://ct3qbm70jk5kc" path="res://scripts/towers/ghost_tower.gd" id="1_spmy1"]
+[ext_resource type="Script" uid="uid://ct3qbm70jk5kc" path="res://scripts/towers/towerGhost.gd" id="1_spmy1"]
 [ext_resource type="Texture2D" uid="uid://dw28lsxh3w677" path="res://assets/Tower/shooter.png" id="2_2xulk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2d0c2"]

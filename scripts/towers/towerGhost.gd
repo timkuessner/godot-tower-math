@@ -1,3 +1,4 @@
+class_name TowerGhost
 extends Node2D
 
 var isValid := true
@@ -12,20 +13,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-var imagePaths := [
-	"res://assets/Tower/shooter.png",
-	"res://assets/Tower/slime.png",
-	"res://assets/Tower/bomber.png",
-	"res://assets/Tower/booster.png",
-	"res://assets/Tower/sniper.png",
-	"res://assets/Tower/mage.png",
-	]
-
-
 func setType(index: int) -> void:
+	var data: Dictionary = Globals.towers[index]
+	var texture: Texture2D = load(data["texture"])
 	if (index==-1):
 		return
-	$".".texture = load(imagePaths[index])
+	$".".texture = texture
 	type = index
 
 func _physics_process(delta: float) -> void:

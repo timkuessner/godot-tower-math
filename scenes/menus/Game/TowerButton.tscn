@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://gybkn127jo73"]
 
-[ext_resource type="Texture2D" uid="uid://dw28lsxh3w677" path="res://assets/Tower/shooter.png" id="1_fd5gr"]
-[ext_resource type="Shader" uid="uid://byrujrx1ghv0o" path="res://scenes/menus/Game/tower_ui.gdshader" id="1_r1c04"]
-[ext_resource type="Script" uid="uid://bma6vxny2kq42" path="res://scripts/ui/tower_editor/towerUI.gd" id="2_txto4"]
-[ext_resource type="Texture2D" uid="uid://b07vquhr6yc0b" path="res://assets/Money.png" id="3_r1c04"]
+[ext_resource type="Shader" uid="uid://byrujrx1ghv0o" path="res://scenes/menus/Game/tower_ui.gdshader" id="1_prax4"]
+[ext_resource type="Script" uid="uid://bma6vxny2kq42" path="res://scripts/ui/tower_editor/towerButton.gd" id="2_prax4"]
+[ext_resource type="Texture2D" uid="uid://dw28lsxh3w677" path="res://assets/Tower/shooter.png" id="3_1b1rs"]
+[ext_resource type="Texture2D" uid="uid://b07vquhr6yc0b" path="res://assets/Money.png" id="4_tjsp2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ec7wt"]
-shader = ExtResource("1_r1c04")
+shader = ExtResource("1_prax4")
 shader_parameter/strength = 0.0
 
 [node name="TowerUI" type="Button" unique_id=1825779563]
@@ -22,7 +22,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 tooltip_text = "This is a normal shooter."
-script = ExtResource("2_txto4")
+script = ExtResource("2_prax4")
 metadata/_edit_group_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1353145386]
@@ -38,7 +38,7 @@ grow_vertical = 2
 use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("1_fd5gr")
+texture = ExtResource("3_1b1rs")
 expand_mode = 1
 stretch_mode = 5
 
@@ -69,6 +69,6 @@ use_parent_material = true
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 offset_transform_position = Vector2(1.085, 0)
-texture = ExtResource("3_r1c04")
+texture = ExtResource("4_tjsp2")
 expand_mode = 1
 stretch_mode = 5

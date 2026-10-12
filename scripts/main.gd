@@ -2,18 +2,16 @@ extends Node
 
 @onready var level_container: Node = $LevelContainer
 @onready var tower_editor: Control = $UI/TowerEditor
+@onready var gameMenue: GameUI = $UI/GameUI
 
 var current_level: Level
 var current_level_number := 1
 
-var base_hp: int
-@export var base_max_hp: int = 10
-
-
-
-
+var towers: Array = []
 
 func _ready() -> void:
+	Globals.money = 150
+	Globals.maxHP = 10
 	start_game()
 	ghostTower.visible = false
 	current_level.add_child(ghostTower)
@@ -40,12 +38,9 @@ func load_level(level_number: int) -> void:
 		_on_goal_area_entered
 	)
 
-	base_hp = base_max_hp
-	$UI/gameMenue.setMaxHP(base_max_hp)
-	$UI/gameMenue.setHP(base_hp)
+	Globals.hp = Globals.maxHP
 	
 	start_function_creation()
-
 
 func on_tower_selected(tower: Tower) -> void:
 	tower_editor.edit_tower(tower)
@@ -92,20 +87,19 @@ func _on_goal_area_entered(area: Area2D) -> void:
 	if enemy.is_queued_for_deletion():
 		return
 
-	base_hp = maxi(base_hp - enemy.hp/5, 0)
-	$UI/gameMenue.setHP(base_hp)
+	Globals.hp = maxi(Globals.hp - enemy.hp/5, 0)
 
 	# Angekommenen Enemy entfernen
 	enemy.queue_free()
 
-	if base_hp == 0:
+	if Globals.hp == 0:
 		lose_level()
   
 var selected: int = -1
-var ghostTower: Node2D = load("res://scenes/towers/ghost_tower.tscn").instantiate()
+var ghostTower: Node2D = load("res://scenes/towers/TowerGhost.tscn").instantiate()
 
 func onTowerSelected(index: int) -> void:
-	if selected!=index:
+	if selected!=index :
 		selected = index
 	else:
 		selected = -1

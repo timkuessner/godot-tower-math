@@ -42,20 +42,13 @@ func shoot() -> void:
 	add_child(projectile)
 	
 	projectile.setup(projectile_path)
-
-var imagePaths := [
-	"res://assets/Tower/shooter.png",
-	"res://assets/Tower/slime.png",
-	"res://assets/Tower/bomber.png",
-	"res://assets/Tower/booster.png",
-	"res://assets/Tower/sniper.png",
-	"res://assets/Tower/mage.png",
-	]
 	
 func setType(index: int) -> void:
 	if (index==-1):
 		return
-	$ClickArea/Shooter.texture = load(imagePaths[index])
+	var data: Dictionary = Globals.towers[index]
+	var texture: Texture2D = load(data["texture"])
+	$ClickArea/Shooter.texture = texture
 	type = index
 
 func _on_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

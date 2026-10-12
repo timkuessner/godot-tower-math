@@ -1,0 +1,38 @@
+[
+	{
+		"name": "Shooter",
+		"texture": "res://assets/Tower/shooter.png",
+		"price": 100,
+		"tooltip": "Shooter\nA reliable all-rounder.\nHits one enemy at a time.\nMedium range and damage."
+	},
+	{
+		"name": "Slime",
+		"texture": "res://assets/Tower/slime.png",
+		"price": 150,
+		"tooltip": "Slime\nSlows enemies down.\nHits several enemies at once.\nDeals no damage."
+	},
+	{
+		"name": "Bomber",
+		"texture": "res://assets/Tower/bomber.png",
+		"price": 250,
+		"tooltip": "Bomber\nExplodes on the first hit.\nHeavy damage to all\nenemies nearby."
+	},
+	{
+		"name": "Booster",
+		"texture": "res://assets/Tower/booster.png",
+		"price": 200,
+		"tooltip": "Booster\nDoesn't attack enemies.\nShoots your towers instead\nand boosts them."
+	},
+	{
+		"name": "Sniper",
+		"texture": "res://assets/Tower/sniper.png",
+		"price": 350,
+		"tooltip": "Sniper\nExtreme range.\nVery high damage to one enemy.\nSlow to reload."
+	},
+	{
+		"name": "Mage",
+		"texture": "res://assets/Tower/mage.png",
+		"price": 600,
+		"tooltip": "Mage\nAn imaginary tower.\nFades in and out and only\nattacks while visible.\nHuge range, area damage.\nExpensive."
+	}
+]
