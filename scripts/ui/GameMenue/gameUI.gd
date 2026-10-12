@@ -7,6 +7,18 @@ var towerScene = preload("res://scenes/menus/Game/TowerButton.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	towerManager.visible = false
+	# hab leider keine besseren weg gefunden, die farben anzupassen
+	$TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/apply.modulate = Color(0.5, 1, 0.5)
+	$TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/apply/Label.modulate = Color(2,1,2)
+	$TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/cancel.modulate = Color(1, 0.5, 0.5)
+	$TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/cancel/Label.modulate = Color(1,2,2)
+	
+	$TowerManager/MarginContainer/VBoxContainer/sell.modulate = Color(1, 0.5, 0.5)
+	$TowerManager/MarginContainer/VBoxContainer/sell/HBoxContainer/Label.modulate = Color(1,2,2)
+	$TowerManager/MarginContainer/VBoxContainer/sell/HBoxContainer/TextureRect.modulate = Color(1,2,2)
+
+	
 	Globals.money_changed.connect(onMoneyChanged)
 	Globals.maxHPChanged.connect(onMaxHPchanged)
 	Globals.hpChanged.connect(onHPchanged)
@@ -39,3 +51,48 @@ func _process(delta: float) -> void:
 
 func onTowerUIPressed(index: int) -> void:
 	towerSelected.emit(index)
+
+@onready var towerManager: Panel = $TowerManager
+@onready var directionButton: Button = $TowerManager/MarginContainer/VBoxContainer/Direction
+@onready var functionContainer: TextEdit = $TowerManager/MarginContainer/VBoxContainer/HBoxContainer/Function
+@onready var sellLabel: Label = $TowerManager/MarginContainer/VBoxContainer/sell/HBoxContainer/Label
+
+var tower: Tower
+
+var direction := false:
+	set(value):
+		if value: directionButton.text = "fire: right"
+		else: directionButton.text = "fire: left"
+		direction = value
+
+func loadTowerManager(t: Tower) -> void:
+	towerManager.visible = true
+	direction = t.direction
+	functionContainer.text = t.text
+	tower = t
+	sellLabel.text = "sell for " + str(tower.sellPrice)
+	tower.showPreview = true
+
+func _on_direction_pressed() -> void:
+	direction = !direction
+	tower.previewDirection = direction
+
+func _on_apply_pressed() -> void:
+	tower.direction = direction
+	tower.text = functionContainer.text
+	tower.showPreview = false
+	towerManager.visible = false
+
+func _on_cancel_pressed() -> void:
+	tower.text = tower.text
+	tower.showPreview = false
+	towerManager.visible = false
+
+func _on_sell_pressed() -> void:
+	Globals.money += tower.sellPrice
+	tower.queue_free()
+	towerManager.visible = false
+
+
+func _on_function_text_changed() -> void:
+	tower.previewText = functionContainer.text

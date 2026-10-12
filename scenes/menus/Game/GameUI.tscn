@@ -6,12 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://7caynrwiv4c1" path="res://assets/enemies/Dunkelblaue Pixel-Textur für die Lebensleiste-2.png" id="4_v122a"]
 [ext_resource type="Texture2D" uid="uid://04o4b17h4gc3" path="res://assets/enemies/Grüne Pixel-Lebensleiste-1.png" id="5_c3aj4"]
 
-[node name="gameMenue" type="Control" unique_id=468380503]
+[node name="GameUI" type="Control" unique_id=468380503]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -28,12 +27,12 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="Margin" type="MarginContainer" parent="SideBar" unique_id=225941939]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 0
+offset_right = 343.0
+offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -41,6 +40,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SideBar/Margin" unique_id=1787646343]
 layout_mode = 2
+theme_override_constants/separation = 15
 
 [node name="Header" type="Label" parent="SideBar/Margin/VBoxContainer" unique_id=1659933859]
 layout_mode = 2
@@ -48,10 +48,6 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 24
 text = "Towers"
 horizontal_alignment = 1
-
-[node name="Margin" type="Control" parent="SideBar/Margin/VBoxContainer" unique_id=846895512]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="SideBar/Margin/VBoxContainer" unique_id=993885296]
 layout_mode = 2
@@ -151,3 +147,129 @@ mouse_filter = 2
 texture = ExtResource("3_7irwq")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="TowerManager" type="Panel" parent="." unique_id=732611811]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.73200005
+anchor_right = 0.73200005
+anchor_bottom = 0.642
+offset_left = -366.96008
+offset_top = 28.0
+offset_right = -23.960083
+offset_bottom = -74.24002
+grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TowerManager" unique_id=1621572115]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TowerManager/MarginContainer" unique_id=19698237]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="Label" parent="TowerManager/MarginContainer/VBoxContainer" unique_id=826413010]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Tower Settings"
+horizontal_alignment = 1
+
+[node name="Direction" type="Button" parent="TowerManager/MarginContainer/VBoxContainer" unique_id=485495084]
+layout_mode = 2
+text = "direction: right"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TowerManager/MarginContainer/VBoxContainer" unique_id=17741290]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Header2" type="Label" parent="TowerManager/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1978226493]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "f(x)="
+horizontal_alignment = 1
+
+[node name="Function" type="TextEdit" parent="TowerManager/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1362262193]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "type your function"
+
+[node name="sell" type="Button" parent="TowerManager/MarginContainer/VBoxContainer" unique_id=1315442924]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TowerManager/MarginContainer/VBoxContainer/sell" unique_id=487221603]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="TowerManager/MarginContainer/VBoxContainer/sell/HBoxContainer" unique_id=2006670031]
+layout_mode = 2
+text = "sell: 150"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TowerManager/MarginContainer/VBoxContainer/sell/HBoxContainer" unique_id=1947579425]
+use_parent_material = true
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+offset_transform_position = Vector2(1.085, 0)
+texture = ExtResource("3_7irwq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TowerManager/MarginContainer/VBoxContainer" unique_id=1800267670]
+layout_mode = 2
+
+[node name="apply" type="Button" parent="TowerManager/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1392305399]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " "
+
+[node name="Label" type="Label" parent="TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/apply" unique_id=220353078]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "apply"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="cancel" type="Button" parent="TowerManager/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1387073756]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " "
+
+[node name="Label" type="Label" parent="TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/cancel" unique_id=2022548550]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "cancel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="TowerManager/MarginContainer/VBoxContainer/Direction" to="." method="_on_direction_pressed"]
+[connection signal="text_changed" from="TowerManager/MarginContainer/VBoxContainer/HBoxContainer/Function" to="." method="_on_function_text_changed"]
+[connection signal="pressed" from="TowerManager/MarginContainer/VBoxContainer/sell" to="." method="_on_sell_pressed"]
+[connection signal="pressed" from="TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/apply" to="." method="_on_apply_pressed"]
+[connection signal="pressed" from="TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/cancel" to="." method="_on_cancel_pressed"]

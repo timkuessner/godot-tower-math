@@ -42,4 +42,6 @@ collision_mask = 0
 position = Vector2(-200, 0)
 polygon = PackedVector2Array(-464, 296, -288, 296, -288, -208, 48, -208, 48, -64, -200, -64, -200, 184, 352, 184, 352, -152, 592, -152, 592, -200, 304, -200, 304, 136, -152, 136, -152, -16, 96, -16, 96, -256, -336, -256, -336, 248, -464, 248)
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=145350569]
+
 [connection signal="body_entered" from="GoalArea" to="." method="_on_base_body_entered"]

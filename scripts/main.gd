@@ -1,8 +1,7 @@
 extends Node
 
 @onready var level_container: Node = $LevelContainer
-@onready var tower_editor: Control = $UI/TowerEditor
-@onready var gameMenue: GameUI = $UI/GameUI
+@onready var gameUI: GameUI = $UI/GameUI
 
 var current_level: Level
 var current_level_number := 1
@@ -10,7 +9,7 @@ var current_level_number := 1
 var towers: Array = []
 
 func _ready() -> void:
-	Globals.money = 500
+	Globals.money = 1500
 	Globals.maxHP = 10
 	start_game()
 	ghostTower.visible = false
@@ -43,7 +42,7 @@ func load_level(level_number: int) -> void:
 	start_function_creation()
 
 func on_tower_selected(tower: Tower) -> void:
-	tower_editor.edit_tower(tower)
+	gameUI.loadTowerManager(tower)
 
 func start_function_creation() -> void:
 	Globals.game_state = Globals.GameState.CREATE_FUNCTIONS
@@ -74,9 +73,6 @@ func next_level() -> void:
 	current_level_number += 1
 	load_level(current_level_number)
 	
-	
-	
-	
 #HP Bar_player
 func _on_goal_area_entered(area: Area2D) -> void:
 	var enemy = area.get_parent()
@@ -94,8 +90,10 @@ func _on_goal_area_entered(area: Area2D) -> void:
 
 	if Globals.hp == 0:
 		lose_level()
-  
+
+# -1: nichts gewählt; -2 tower gewählt; positive oder nullwerte: towertyp gewählt
 var selected: int = -1
+
 var ghostTower: Node2D = load("res://scenes/towers/TowerGhost.tscn").instantiate()
 
 func onTowerSelected(index: int) -> void:

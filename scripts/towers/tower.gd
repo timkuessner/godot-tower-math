@@ -9,20 +9,50 @@ signal tower_clicked(tower: Tower)
 
 var type: int = 0
 
-
 @export var projectile_scene: PackedScene
 
 var projectile: Projectile
 
+var previewText: String = "":
+	set(value):
+		previewText = value
+		previewFunction.set_text(previewText)
+		previewPath = drawPath(previewFunction)
+		queue_redraw()
+var text: String = "":
+	set(value):
+		text = value
+		previewText = value
+		function.set_text(text)
+		path = drawPath(function)
+
+var previewFunction: Function = Function.new()
 var function: Function = Function.new()
 
-var projectile_path: PackedVector2Array
+var previewPath: PackedVector2Array
+var path: PackedVector2Array
 
-var function_text: String = "":
+var direction := true:
 	set(value):
-		function_text = value
-		function.set_text(value)
+		direction = value
+		previewDirection = value
+		path = drawPath(function)
+
+var previewDirection := true:
+	set(value):
+		previewDirection = value
+		previewPath = drawPath(previewFunction)
 		queue_redraw()
+
+var showPreview: bool = false:
+	set(value):
+		showPreview = value
+		previewText = previewText
+
+var sellPrice: int
+
+func _ready() -> void:
+	text = ""
 
 func _draw() -> void:
 	if Globals.game_state != Globals.GameState.CREATE_FUNCTIONS:
@@ -31,18 +61,23 @@ func _draw() -> void:
 	if !function.is_valid:
 		return
 	
-	projectile_path = function.create_path(function_length, -0.1) # l ist immer positiv, schrittweite kann bei Richtungswechsel negativ sein
+	if path.size() >= 2:
+		draw_polyline(path, Color.from_rgba8(255,255,255,127), 2, true)
+		if showPreview:
+			draw_polyline(previewPath, Color.WHITE, 2, true)
 	
-	if projectile_path.size() >= 2:
-		draw_polyline(projectile_path, Color.WHITE, 2, true)
 
+
+func drawPath(f: Function) -> PackedVector2Array:
+	var step = 0.01 if direction else -0.01
+	return function.rescrale(f.create_path(function_length, step), 720./10.)
 
 func shoot() -> void:
 	projectile = projectile_scene.instantiate()
 	
 	add_child(projectile)
 	
-	projectile.setup(projectile_path)
+	projectile.setup(path)
 	
 func setType(index: int) -> void:
 	type = index
@@ -54,6 +89,9 @@ func setType(index: int) -> void:
 	function_length = data["range"]
 	function_speed = data["projectile_speed"]
 	enemies_per_function = data["max_targets"]
+	sellPrice = data["sell_price"]
+	Globals.money -= data["price"]
+	text = text
 
 func _on_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:

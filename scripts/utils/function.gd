@@ -63,6 +63,8 @@ func pharser(t: String) -> String:
 	return t
 
 func normalise(t: String) -> String:
+	if (t == ""):
+		return "0"
 	t = t.to_lower()
 	for r in replacements:
 		t = t.replace(r[0], r[1])
@@ -112,3 +114,9 @@ func create_path(length: float, step: float) -> PackedVector2Array:
 		xOld = x
 		yOld = y
 	return path
+
+func rescrale(path: PackedVector2Array, scale: int) -> PackedVector2Array:
+	var newPath: = PackedVector2Array()
+	for position in path:
+		newPath.append(Vector2(position[0]*scale, position[1]*scale))
+	return newPath

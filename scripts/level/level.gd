@@ -31,7 +31,7 @@ func create_container(container_name: String) -> Node2D:
 	return container
 
 
-func spawn_tower(position: Vector2, type: int) -> Tower:
+func spawn_tower(position: Vector2, type: int) -> Tower:	
 	var tower: Tower = TOWER_SCENE.instantiate()
 	
 	tower.position = position
