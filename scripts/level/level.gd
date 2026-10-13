@@ -22,6 +22,7 @@ func create_runtime_containers() -> void:
 	tower_container = create_container("TowerContainer")
 	enemy_container = create_container("EnemyContainer")
 	projectile_container = create_container("ProjectileContainer")
+	tower_container.y_sort_enabled = true
 
 
 func create_container(container_name: String) -> Node2D:

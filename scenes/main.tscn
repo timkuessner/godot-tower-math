@@ -10,7 +10,6 @@ script = ExtResource("1_o5qli")
 [node name="LevelContainer" type="Node" parent="." unique_id=231928737]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=404488980]
-position = Vector2(-71, 57)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=133716676]
 

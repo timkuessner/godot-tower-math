@@ -3,17 +3,20 @@
 [ext_resource type="Script" uid="uid://ct3qbm70jk5kc" path="res://scripts/towers/towerGhost.gd" id="1_spmy1"]
 [ext_resource type="Texture2D" uid="uid://dw28lsxh3w677" path="res://assets/Tower/shooter.png" id="2_2xulk"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2d0c2"]
-size = Vector2(57.441257, 57.441257)
+[sub_resource type="CircleShape2D" id="CircleShape2D_sde0f"]
+radius = 24.0
 
-[node name="ghostTower" type="Sprite2D" unique_id=685811796]
-scale = Vector2(0.383, 0.383)
-texture = ExtResource("2_2xulk")
+[node name="ghostTower" type="Node2D" unique_id=873202357]
 script = ExtResource("1_spmy1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=308430179]
+position = Vector2(9.536743e-07, 9.536743e-07)
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("2_2xulk")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=482265989]
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1723842131]
-shape = SubResource("RectangleShape2D_2d0c2")
+shape = SubResource("CircleShape2D_sde0f")

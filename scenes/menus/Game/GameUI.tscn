@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://bf5yd53woqnrm"]
 
-[ext_resource type="PackedScene" uid="uid://gybkn127jo73" path="res://scenes/menus/Game/TowerButton.tscn" id="1_4n28k"]
 [ext_resource type="Script" uid="uid://c2salx8tdtdfj" path="res://scripts/ui/GameMenue/gameUI.gd" id="1_idmre"]
 [ext_resource type="Texture2D" uid="uid://b07vquhr6yc0b" path="res://assets/Money.png" id="3_7irwq"]
 [ext_resource type="Texture2D" uid="uid://7caynrwiv4c1" path="res://assets/enemies/Dunkelblaue Pixel-Textur für die Lebensleiste-2.png" id="4_v122a"]
@@ -57,12 +56,6 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 columns = 2
-
-[node name="TowerUI2" parent="SideBar/Margin/VBoxContainer/ScrollContainer/GridContainer" unique_id=1825779563 instance=ExtResource("1_4n28k")]
-layout_mode = 2
-
-[node name="TowerUI" parent="SideBar/Margin/VBoxContainer/ScrollContainer/GridContainer" unique_id=79252420 instance=ExtResource("1_4n28k")]
-layout_mode = 2
 
 [node name="UpperLeft" type="Control" parent="." unique_id=104370842]
 anchors_preset = 0

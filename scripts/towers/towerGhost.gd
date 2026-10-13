@@ -18,7 +18,7 @@ func setType(index: int) -> void:
 	var texture: Texture2D = load(data["texture"])
 	if (index==-1):
 		return
-	$".".texture = texture
+	$Sprite2D.texture = texture
 	type = index
 
 func _physics_process(delta: float) -> void:
