@@ -3,7 +3,20 @@
 [ext_resource type="Script" uid="uid://c2salx8tdtdfj" path="res://scripts/ui/GameMenue/gameUI.gd" id="1_idmre"]
 [ext_resource type="Texture2D" uid="uid://b07vquhr6yc0b" path="res://assets/Money.png" id="3_7irwq"]
 [ext_resource type="Texture2D" uid="uid://7caynrwiv4c1" path="res://assets/enemies/Dunkelblaue Pixel-Textur für die Lebensleiste-2.png" id="4_v122a"]
+[ext_resource type="Texture2D" uid="uid://b2opnnacxv7la" path="res://assets/UI/play.png" id="5_bwx4b"]
 [ext_resource type="Texture2D" uid="uid://04o4b17h4gc3" path="res://assets/enemies/Grüne Pixel-Lebensleiste-1.png" id="5_c3aj4"]
+[ext_resource type="Texture2D" uid="uid://b0dd72cm6av7h" path="res://assets/UI/speed_x1.png" id="6_n3ag2"]
+[ext_resource type="Texture2D" uid="uid://ks6qmwbap44" path="res://assets/UI/exit.png" id="7_gts4l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2d0c2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ilqog"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5pil0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_43vel"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ts34l"]
 
 [node name="GameUI" type="Control" unique_id=468380503]
 layout_mode = 3
@@ -18,10 +31,10 @@ script = ExtResource("1_idmre")
 [node name="SideBar" type="Panel" parent="." unique_id=418483447]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.0
+anchor_left = 0.73200005
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -343.0
+offset_left = 0.039916992
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -146,11 +159,11 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.73200005
 anchor_right = 0.73200005
-anchor_bottom = 0.642
+anchor_bottom = 0.55600005
 offset_left = -366.96008
 offset_top = 28.0
 offset_right = -23.960083
-offset_bottom = -74.24002
+offset_bottom = -12.320038
 grow_horizontal = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="TowerManager" unique_id=1621572115]
@@ -260,6 +273,67 @@ grow_vertical = 2
 text = "cancel"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1661496514]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.73200005
+anchor_top = 1.0
+anchor_right = 0.73200005
+anchor_bottom = 1.0
+offset_left = -312.96008
+offset_top = -240.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="Running" type="Button" parent="HBoxContainer" unique_id=858432814]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_2d0c2")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ilqog")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5pil0")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_43vel")
+theme_override_styles/focus = SubResource("StyleBoxTexture_ts34l")
+icon = ExtResource("5_bwx4b")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Speed" type="Button" parent="HBoxContainer" unique_id=4871391]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_2d0c2")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ilqog")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5pil0")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_43vel")
+theme_override_styles/focus = SubResource("StyleBoxTexture_ts34l")
+icon = ExtResource("6_n3ag2")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Exit" type="Button" parent="HBoxContainer" unique_id=1530302068]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_2d0c2")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ilqog")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5pil0")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_43vel")
+theme_override_styles/focus = SubResource("StyleBoxTexture_ts34l")
+icon = ExtResource("7_gts4l")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [connection signal="pressed" from="TowerManager/MarginContainer/VBoxContainer/Direction" to="." method="_on_direction_pressed"]
 [connection signal="text_changed" from="TowerManager/MarginContainer/VBoxContainer/HBoxContainer/Function" to="." method="_on_function_text_changed"]
