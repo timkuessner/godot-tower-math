@@ -104,7 +104,7 @@ var speedTextures := [
 	preload("res://assets/UI/speed_x4.png")
 ]
 
-var running := false:
+var running := true:
 	set(value):
 		running = value
 		playButton.icon = playTextures[int(value)]
@@ -116,17 +116,17 @@ var speed_state := 0:
 		speedButton.icon = speedTextures[value]
 		updateEngineSpeed()
 
-func _on_running_pressed() -> void:
-	running = !running
-
-func _on_speed_pressed() -> void:
-	speed_state = (speed_state + 1) % 3
-
 func updateEngineSpeed() -> void:
 	Engine.time_scale = (2**speed_state)
 	print(Engine.time_scale)
 	if (!running):
 		Engine.time_scale = 0
+
+func _on_running_pressed() -> void:
+	running = !running
+
+func _on_speed_pressed() -> void:
+	speed_state = (speed_state + 1) % 3
 
 func _on_exit_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menus/MainMenue.tscn")
