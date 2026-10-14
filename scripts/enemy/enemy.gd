@@ -1,8 +1,9 @@
 class_name Enemy
 extends PathFollow2D
 
-@export var speed: float = 100.0
-@export var hp: float = 10
+@export var speed: float = 60.0
+@export var hp: float = 20
+@export var value: int = 10
 
 @onready var hp_bar: ProgressBar = $Hp_bar
 @onready var texture_progress_bar: TextureProgressBar = $TextureProgressBar
@@ -45,6 +46,7 @@ func handleDamage(amount: float) -> bool:
 
 	if hp <= 0:
 		queue_free()
+		Globals.money += value
 	return true
 
 func _on_slow_timer_timeout() -> void:

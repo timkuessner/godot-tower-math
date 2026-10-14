@@ -35,7 +35,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kej8o"]
-radius = 28.01785
+radius = 17.0
 
 [node name="enemy" type="PathFollow2D" unique_id=657380412]
 rotates = false
@@ -43,15 +43,15 @@ loop = false
 script = ExtResource("1_a3pup")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=196799970]
-scale = Vector2(3.25, 3.229409)
+scale = Vector2(2.416667, 2.4013553)
 sprite_frames = SubResource("SpriteFrames_ietdp")
 autoplay = "default"
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=2035396236]
 offset_left = -21.0
-offset_top = -45.0
+offset_top = -36.0
 offset_right = 2058.0
-offset_bottom = 711.0
+offset_bottom = 720.0
 scale = Vector2(0.02, 0.02)
 mouse_filter = 2
 value = 100.0

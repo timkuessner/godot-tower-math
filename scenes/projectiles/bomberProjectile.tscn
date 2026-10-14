@@ -15,6 +15,7 @@ size = Vector2(180.00026, 235.00034)
 
 [node name="BomberProjectile" unique_id=916805144 instance=ExtResource("1_rqbve")]
 script = ExtResource("2_ngikn")
+damage = 2.0
 
 [node name="Sprite2D" parent="." index="0" unique_id=648682641]
 scale = Vector2(1.25, 1.25)

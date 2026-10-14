@@ -28,3 +28,5 @@ func setType(index: int) -> void:
 	$VBoxContainer/MarginContainer/HBoxContainer/Label.text = str(price)
 	tooltip_text = tooltip
 	type = index
+	if (index == 3 or 5):
+		setDisabled(true)

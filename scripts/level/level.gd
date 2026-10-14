@@ -16,7 +16,7 @@ var projectile_container: Node2D
 
 func _ready() -> void:
 	create_runtime_containers()
-	$enemy1_spawn/SpawnTimer.timeout.connect(spawn_enemy)
+	$enemy1_spawn/EnemySpawner.play("wawes")
 
 func create_runtime_containers() -> void:
 	tower_container = create_container("TowerContainer")
@@ -52,3 +52,9 @@ func on_tower_selected(tower: Tower):
 func spawn_enemy():
 	var enemy = ENEMY_SCENE.instantiate()
 	path.add_child(enemy)
+
+func spawn_group(number: int, interval: float):
+	for i in range(number):
+		var enemy = ENEMY_SCENE.instantiate()
+		spawn_enemy()
+		await get_tree().create_timer(interval, false).timeout
