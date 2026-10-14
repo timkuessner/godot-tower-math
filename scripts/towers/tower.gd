@@ -108,6 +108,5 @@ func _on_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: in
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			tower_clicked.emit(self)
 
-
 func _on_timer_timeout() -> void:
 	shoot()

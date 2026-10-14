@@ -287,6 +287,7 @@ offset_right = -20.0
 offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
 theme_override_constants/separation = 10
 alignment = 2
 
@@ -340,3 +341,6 @@ expand_icon = true
 [connection signal="pressed" from="TowerManager/MarginContainer/VBoxContainer/sell" to="." method="_on_sell_pressed"]
 [connection signal="pressed" from="TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/apply" to="." method="_on_apply_pressed"]
 [connection signal="pressed" from="TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="HBoxContainer/Running" to="." method="_on_running_pressed"]
+[connection signal="pressed" from="HBoxContainer/Speed" to="." method="_on_speed_pressed"]
+[connection signal="pressed" from="HBoxContainer/Exit" to="." method="_on_exit_pressed"]

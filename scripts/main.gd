@@ -103,7 +103,7 @@ func onTowerSelected(index: int) -> void:
 		selected = -1
 	ghostTower.setType(selected)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	var show := (selected != -1 and get_viewport().gui_get_hovered_control() == null)
 	ghostTower.visible = show
 	if show:

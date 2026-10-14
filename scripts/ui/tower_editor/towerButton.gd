@@ -28,7 +28,3 @@ func setType(index: int) -> void:
 	$VBoxContainer/MarginContainer/HBoxContainer/Label.text = str(price)
 	tooltip_text = tooltip
 	type = index
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

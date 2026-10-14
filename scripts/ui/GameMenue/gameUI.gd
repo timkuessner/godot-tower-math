@@ -5,7 +5,6 @@ signal towerSelected(index: int)
 
 var towerScene = preload("res://scenes/menus/Game/TowerButton.tscn")
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	towerManager.visible = false
 	# hab leider keine besseren weg gefunden, die farben anzupassen
@@ -43,11 +42,6 @@ func onHPchanged(value: float) -> void:
 
 func updateText():
 	$UpperLeft/MarginContainer/VBoxContainer/Label.text = str(bar.value) + "/" + str(bar.max_value) + " HP"
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 
 func onTowerUIPressed(index: int) -> void:
 	towerSelected.emit(index)
@@ -96,3 +90,43 @@ func _on_sell_pressed() -> void:
 
 func _on_function_text_changed() -> void:
 	tower.previewText = functionContainer.text
+
+@onready var playButton: Button = $HBoxContainer/Running
+@onready var speedButton: Button = $HBoxContainer/Speed
+
+var playTextures := [
+	preload("res://assets/UI/pause.png"),
+	preload("res://assets/UI/play.png")
+]
+var speedTextures := [
+	preload("res://assets/UI/speed_x1.png"),
+	preload("res://assets/UI/speed_x2.png"),
+	preload("res://assets/UI/speed_x4.png")
+]
+
+var running := false:
+	set(value):
+		running = value
+		playButton.icon = playTextures[int(value)]
+		updateEngineSpeed()
+
+var speed_state := 0:
+	set(value):
+		speed_state = value
+		speedButton.icon = speedTextures[value]
+		updateEngineSpeed()
+
+func _on_running_pressed() -> void:
+	running = !running
+
+func _on_speed_pressed() -> void:
+	speed_state = (speed_state + 1) % 3
+
+func updateEngineSpeed() -> void:
+	Engine.time_scale = (2**speed_state)
+	print(Engine.time_scale)
+	if (!running):
+		Engine.time_scale = 0
+
+func _on_exit_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/menus/MainMenue.tscn")
