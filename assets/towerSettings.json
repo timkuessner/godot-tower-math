@@ -11,6 +11,7 @@
 		"fire_rate": 1.5,
 		"max_targets": 1,
 		"projectile_speed": 8.0,
+		"projectile_scene" : "res://scenes/projectiles/shooterProjectile.tscn",
 		"tooltip": "Shooter\nA reliable all-rounder.\nHits one enemy at a time.\nMedium range and damage."
 	},
 	{
@@ -27,6 +28,7 @@
 		"projectile_speed": 5.0,
 		"slow_factor": 0.5,
 		"slow_duration": 2.0,
+		"projectile_scene" : "res://scenes/projectiles/slimeProjectile.tscn",
 		"tooltip": "Slime\nSlows enemies down.\nHits several enemies at once.\nDeals no damage."
 	},
 	{
@@ -42,6 +44,7 @@
 		"max_targets": 1,
 		"projectile_speed": 4.5,
 		"aoe_radius": 1.0,
+		"projectile_scene" : "res://scenes/projectiles/bomberProjectile.tscn",
 		"tooltip": "Bomber\nExplodes on the first hit.\nHeavy damage to all\nenemies nearby."
 	},
 	{
@@ -58,6 +61,7 @@
 		"projectile_speed": 6.0,
 		"boost_factor": 1.25,
 		"boost_duration": 3.0,
+		"projectile_scene" : "res://scenes/projectiles/boosterProjectile.tscn",
 		"tooltip": "Booster\nDoesn't attack enemies.\nShoots your towers instead\nand boosts them."
 	},
 	{
@@ -72,6 +76,7 @@
 		"fire_rate": 0.3,
 		"max_targets": 1,
 		"projectile_speed": 25.0,
+		"projectile_scene" : "res://scenes/projectiles/sniperProjectile.tscn",
 		"tooltip": "Sniper\nExtreme range.\nVery high damage to one enemy.\nSlow to reload."
 	},
 	{
@@ -89,6 +94,7 @@
 		"aoe_radius": 0.8,
 		"hits_per_target": 3,
 		"phase_speed": 1.0,
+		"projectile_scene" : "res://scenes/projectiles/mageProjectile.tscn",
 		"tooltip": "Mage\nAn imaginary tower.\nFades in and out and only\nattacks while visible.\nHuge range, area damage.\nExpensive."
 	}
 ]

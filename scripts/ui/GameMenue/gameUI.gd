@@ -107,7 +107,7 @@ var speedTextures := [
 var running := true:
 	set(value):
 		running = value
-		playButton.icon = playTextures[int(value)]
+		playButton.icon = playTextures[int(!value)]
 		updateEngineSpeed()
 
 var speed_state := 0:
@@ -118,7 +118,6 @@ var speed_state := 0:
 
 func updateEngineSpeed() -> void:
 	Engine.time_scale = (2**speed_state)
-	print(Engine.time_scale)
 	if (!running):
 		Engine.time_scale = 0
 

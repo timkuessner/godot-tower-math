@@ -30,7 +30,8 @@ window/stretch/mode="canvas_items"
 
 2d_physics/layer_1="enemy"
 2d_physics/layer_2="projectile"
-2d_physics/layer_3="t"
+2d_physics/layer_3="towerProjectile"
+2d_physics/layer_4="towerPlacement"
 
 [physics]
 

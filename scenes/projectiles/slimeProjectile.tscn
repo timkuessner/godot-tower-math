@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cvvjoa37j74uq"]
+
+[ext_resource type="PackedScene" uid="uid://blp7yyhnaxcir" path="res://scenes/projectiles/Projectile.tscn" id="1_c3wv3"]
+[ext_resource type="Texture2D" uid="uid://cy8un6586sgna" path="res://assets/Projectiles/slime_projectile.png" id="2_qng3c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c3wv3"]
+size = Vector2(310.00006, 200.00003)
+
+[node name="SlimeProjectile" unique_id=916805144 instance=ExtResource("1_c3wv3")]
+damage = 0.2
+maxEnemies = 4
+slowness = true
+
+[node name="Sprite2D" parent="." index="0" unique_id=648682641]
+scale = Vector2(1.7187499, 1.6768291)
+texture = ExtResource("2_qng3c")
+
+[node name="CollisionShape2D" parent="Area2D" parent_id_path=PackedInt32Array(250450778) index="0" unique_id=1848872446]
+position = Vector2(-95, 0)
+scale = Vector2(0.9999997, 0.9999997)
+shape = SubResource("RectangleShape2D_c3wv3")

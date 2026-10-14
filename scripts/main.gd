@@ -38,15 +38,9 @@ func load_level(level_number: int) -> void:
 	)
 
 	Globals.hp = Globals.maxHP
-	
-	start_function_creation()
 
 func on_tower_selected(tower: Tower) -> void:
 	gameUI.loadTowerManager(tower)
-
-func start_function_creation() -> void:
-	Globals.game_state = Globals.GameState.CREATE_FUNCTIONS
-
 
 func start_playing() -> void:
 	Globals.game_state = Globals.GameState.PLAYING

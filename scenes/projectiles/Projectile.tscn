@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://blp7yyhnaxcir"]
+
+[ext_resource type="Script" uid="uid://c45vmrbmd1ian" path="res://scripts/projectiles/projectile.gd" id="1_08mb2"]
+[ext_resource type="Texture2D" uid="uid://tk4w74rp7jv6" path="res://assets/Projectiles/shooter_projectile.png" id="2_dfwg1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kej8o"]
+size = Vector2(150.00009, 70.00004)
+
+[node name="Projectile1" type="Node2D" unique_id=916805144]
+light_mask = 2
+visibility_layer = 2
+script = ExtResource("1_08mb2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=648682641]
+light_mask = 2
+visibility_layer = 2
+scale = Vector2(0.93749994, 0.9374999)
+texture = ExtResource("2_dfwg1")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=250450778]
+scale = Vector2(0.2, 0.2)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1848872446]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(-24.999996, 6.7762595e-21)
+scale = Vector2(0.9999992, 0.9999992)
+shape = SubResource("RectangleShape2D_kej8o")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

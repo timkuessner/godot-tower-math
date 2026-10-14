@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cfsfa2ltkglcb"]
+
+[ext_resource type="PackedScene" uid="uid://blp7yyhnaxcir" path="res://scenes/projectiles/Projectile.tscn" id="1_e5emo"]
+[ext_resource type="Texture2D" uid="uid://bac2e2pwrtdrv" path="res://assets/Projectiles/booster_projectile.png" id="2_66nu3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqbve"]
+size = Vector2(120.00013, 130.00009)
+
+[node name="BoosterProjectile" unique_id=916805144 instance=ExtResource("1_e5emo")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=648682641]
+texture = ExtResource("2_66nu3")
+
+[node name="CollisionShape2D" parent="Area2D" parent_id_path=PackedInt32Array(250450778) index="0" unique_id=1848872446]
+position = Vector2(-9.999999, 0)
+scale = Vector2(0.9999988, 0.9999988)
+shape = SubResource("RectangleShape2D_rqbve")

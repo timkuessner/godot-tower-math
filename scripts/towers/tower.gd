@@ -3,15 +3,15 @@ extends Node2D
 
 signal tower_clicked(tower: Tower)
 
-@export var function_length: float = 1000.0
-@export var function_speed: float = 10.0
-@export var enemies_per_function: int = 1
+var function_length: float = 1000.0
+
+@onready var timer: Timer = $Timer
 
 var rotateTexture
 
 var type: int = 0
 
-@export var projectile_scene: PackedScene
+var projectile_scene: PackedScene
 
 var projectile: Projectile
 
@@ -21,6 +21,7 @@ var previewText: String = "0":
 		previewFunction.set_text(previewText)
 		previewPath = drawPath(previewFunction, previewDirection)
 		queue_redraw()
+
 var text: String = "0":
 	set(value):
 		text = value
@@ -59,9 +60,6 @@ func _ready() -> void:
 	pass
 
 func _draw() -> void:
-	if Globals.game_state != Globals.GameState.CREATE_FUNCTIONS:
-		return
-	
 	if !function.is_valid:
 		return
 	
@@ -79,7 +77,6 @@ func drawPath(f: Function, d: bool) -> PackedVector2Array:
 
 func shoot() -> void:
 	projectile = projectile_scene.instantiate()
-	
 	add_child(projectile)
 	
 	projectile.setup(path)
@@ -96,11 +93,11 @@ func setType(index: int) -> void:
 	var texture: Texture2D = load(data["texture"])
 	$Sprite2D.texture = texture
 	function_length = data["range"]
-	function_speed = data["projectile_speed"]
-	enemies_per_function = data["max_targets"]
 	sellPrice = data["sell_price"]
 	Globals.money -= data["price"]
 	rotateTexture = data["rotate_texture"]
+	projectile_scene = load(data["projectile_scene"])
+	timer.wait_time = 1./data["fire_rate"]
 	text = text
 
 func _on_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

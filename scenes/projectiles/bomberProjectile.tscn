@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cti44ucyndy4a"]
+
+[ext_resource type="PackedScene" uid="uid://blp7yyhnaxcir" path="res://scenes/projectiles/Projectile.tscn" id="1_rqbve"]
+[ext_resource type="Script" uid="uid://765jvauuvibf" path="res://scripts/projectiles/bomber_projectile.gd" id="2_ngikn"]
+[ext_resource type="Texture2D" uid="uid://30dc3cdpqy58" path="res://assets/Projectiles/bomber_projectile.png" id="2_r4vdd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r4vdd"]
+radius = 100.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hukbu"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qoe8"]
+size = Vector2(180.00026, 235.00034)
+
+[node name="BomberProjectile" unique_id=916805144 instance=ExtResource("1_rqbve")]
+script = ExtResource("2_ngikn")
+
+[node name="Sprite2D" parent="." index="0" unique_id=648682641]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_r4vdd")
+
+[node name="Zone2" type="Area2D" parent="." index="1" unique_id=495247417]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zone2" index="0" unique_id=1241562556]
+shape = SubResource("CircleShape2D_r4vdd")
+
+[node name="Zone1" type="Area2D" parent="." index="2" unique_id=1347813560]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zone1" index="0" unique_id=1572382153]
+shape = SubResource("CircleShape2D_hukbu")
+
+[node name="CollisionShape2D" parent="Area2D" parent_id_path=PackedInt32Array(250450778) index="0" unique_id=1848872446]
+position = Vector2(-74.99999, -2.2737368e-13)
+rotation = 1.5707964
+scale = Vector2(0.9999985, 0.9999985)
+shape = SubResource("RectangleShape2D_5qoe8")

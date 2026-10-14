@@ -1,13 +1,12 @@
 extends Node
 
 enum GameState {
-	CREATE_FUNCTIONS,
 	PLAYING,
 	WON,
 	LOST
 }
 
-var game_state := GameState.CREATE_FUNCTIONS
+var game_state := GameState.PLAYING
 
 var towers: Array = []
 func _ready() -> void:

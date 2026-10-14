@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://wwdanomxtula"]
+
+[ext_resource type="PackedScene" uid="uid://blp7yyhnaxcir" path="res://scenes/projectiles/Projectile.tscn" id="1_hr6lp"]
+[ext_resource type="Texture2D" uid="uid://stnkkklnjw4k" path="res://assets/Projectiles/mage_projectile.png" id="2_84yjc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84yjc"]
+size = Vector2(165.00012, 150.00012)
+
+[node name="MageProjectile" unique_id=916805144 instance=ExtResource("1_hr6lp")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=648682641]
+texture = ExtResource("2_84yjc")
+
+[node name="CollisionShape2D" parent="Area2D" parent_id_path=PackedInt32Array(250450778) index="0" unique_id=1848872446]
+position = Vector2(-47.499977, 6.7762563e-21)
+scale = Vector2(0.99999905, 0.99999905)
+shape = SubResource("RectangleShape2D_84yjc")

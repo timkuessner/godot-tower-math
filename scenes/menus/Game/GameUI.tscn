@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://c2salx8tdtdfj" path="res://scripts/ui/GameMenue/gameUI.gd" id="1_idmre"]
 [ext_resource type="Texture2D" uid="uid://b07vquhr6yc0b" path="res://assets/Money.png" id="3_7irwq"]
 [ext_resource type="Texture2D" uid="uid://7caynrwiv4c1" path="res://assets/enemies/Dunkelblaue Pixel-Textur für die Lebensleiste-2.png" id="4_v122a"]
-[ext_resource type="Texture2D" uid="uid://b2opnnacxv7la" path="res://assets/UI/play.png" id="5_bwx4b"]
 [ext_resource type="Texture2D" uid="uid://04o4b17h4gc3" path="res://assets/enemies/Grüne Pixel-Lebensleiste-1.png" id="5_c3aj4"]
-[ext_resource type="Texture2D" uid="uid://b0dd72cm6av7h" path="res://assets/UI/speed_x1.png" id="6_n3ag2"]
+[ext_resource type="Texture2D" uid="uid://b0dd72cm6av7h" path="res://assets/UI/speed_x1.png" id="6_gts4l"]
+[ext_resource type="Texture2D" uid="uid://cw451umbadmry" path="res://assets/UI/pause.png" id="6_n3ag2"]
 [ext_resource type="Texture2D" uid="uid://ks6qmwbap44" path="res://assets/UI/exit.png" id="7_gts4l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2d0c2"]
@@ -301,7 +301,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_ilqog")
 theme_override_styles/hover = SubResource("StyleBoxTexture_5pil0")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_43vel")
 theme_override_styles/focus = SubResource("StyleBoxTexture_ts34l")
-icon = ExtResource("5_bwx4b")
+icon = ExtResource("6_n3ag2")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -316,7 +316,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_ilqog")
 theme_override_styles/hover = SubResource("StyleBoxTexture_5pil0")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_43vel")
 theme_override_styles/focus = SubResource("StyleBoxTexture_ts34l")
-icon = ExtResource("6_n3ag2")
+icon = ExtResource("6_gts4l")
 flat = true
 icon_alignment = 1
 expand_icon = true
