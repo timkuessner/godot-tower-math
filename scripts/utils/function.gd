@@ -5,6 +5,12 @@ var text: String = ""
 var function: Expression = Expression.new()
 var is_valid: bool = false
 
+const MATH_CONSTANTS := {
+	"PI": PI,
+	"TAU": TAU,
+	"exp(1)": exp(1),
+}
+
 var replacements := [
 	["exp", "K7mQ2aV9pL4zN8rT6wY0"],
 	["−", "-"],
@@ -60,7 +66,30 @@ func set_text(function_text: String) -> void:
 # Main Pipeline
 func pharser(t: String) -> String:
 	t = normalise(t)
+	
+	t = implicit_multiplication(t)
+	
 	return t
+
+func implicit_multiplication(text: String) -> String:
+	for constant in MATH_CONSTANTS:
+		text = text.replace(constant, str(MATH_CONSTANTS[constant]))
+	
+	var regex = RegEx.new()
+	
+	regex.compile("([0-9])([a-z])")
+	text = regex.sub(text, "$1*$2", true)
+	
+	regex.compile("([0-9])\\(")
+	text = regex.sub(text, "$1*(", true)
+	
+	regex.compile("\\)([a-z0-9(])")
+	text = regex.sub(text, ")*$1", true)
+	
+	regex.compile("\\)\\(")
+	text = regex.sub(text, "$1*$2", true)
+	
+	return text
 
 func normalise(t: String) -> String:
 	if (t == ""):
