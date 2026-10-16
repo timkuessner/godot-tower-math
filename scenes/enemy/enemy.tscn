@@ -17,6 +17,22 @@ region = Rect2(168, 48, 24, 24)
 atlas = ExtResource("1_pgpww")
 region = Rect2(192, 48, 24, 24)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjssy"]
+atlas = ExtResource("1_pgpww")
+region = Rect2(144, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl05p"]
+atlas = ExtResource("1_pgpww")
+region = Rect2(168, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwlon"]
+atlas = ExtResource("1_pgpww")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbhyu"]
+atlas = ExtResource("1_pgpww")
+region = Rect2(24, 24, 24, 24)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ietdp"]
 animations = [{
 "frames": [{
@@ -30,7 +46,29 @@ animations = [{
 "texture": SubResource("AtlasTexture_ctrou")
 }],
 "loop": 2,
-"name": &"default",
+"name": &"Fast",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjssy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gl05p")
+}],
+"loop": 1,
+"name": &"Normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwlon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbhyu")
+}],
+"loop": 1,
+"name": &"Tank",
 "speed": 5.0
 }]
 
@@ -45,7 +83,8 @@ script = ExtResource("1_a3pup")
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=196799970]
 scale = Vector2(2.416667, 2.4013553)
 sprite_frames = SubResource("SpriteFrames_ietdp")
-autoplay = "default"
+animation = &"Tank"
+autoplay = "Normal"
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=2035396236]
 offset_left = -21.0

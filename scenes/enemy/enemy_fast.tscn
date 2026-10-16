@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bb8k0yyhhg1i6"]
+
+[ext_resource type="PackedScene" uid="uid://crerpupghcbfr" path="res://scenes/enemy/enemy.tscn" id="1_cdtvn"]
+
+[node name="enemy" unique_id=657380412 instance=ExtResource("1_cdtvn")]
+speed = 110.0
+hp = 10.0
+
+[node name="AnimatedSprite2D2" parent="." index="0" unique_id=196799970]
+animation = &"Fast"
+autoplay = "Fast"

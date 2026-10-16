@@ -8,6 +8,8 @@ var current_level_number := 1
 
 var towers: Array = []
 
+
+
 func _ready() -> void:
 	Globals.money = 200
 	Globals.maxHP = 20

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://4dqk42pu5rt"]
+
+[ext_resource type="PackedScene" uid="uid://crerpupghcbfr" path="res://scenes/enemy/enemy.tscn" id="1_au7ss"]
+
+[node name="enemy" unique_id=657380412 instance=ExtResource("1_au7ss")]
+speed = 40.0
+hp = 30.0
+value = 30
+
+[node name="AnimatedSprite2D2" parent="." index="0" unique_id=196799970]
+autoplay = "Tank"
