@@ -11,7 +11,7 @@ var towers: Array = []
 
 
 func _ready() -> void:
-	Globals.money = 200
+	Globals.money = 20000
 	Globals.maxHP = 20
 	start_game()
 	ghostTower.visible = false
@@ -107,7 +107,7 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not ghostTower.visible:
+	if !ghostTower.visible or !Globals.game_state==Globals.GameState.PLAYING:
 		return
 	if not (event is InputEventMouseButton and event.pressed):
 		return

@@ -3,6 +3,9 @@ extends Control
 
 var selected_tower: Tower
 
+func _ready() -> void:
+	Globals.gameStateChanged.connect(onGameStateChanged)
+
 func edit_tower(tower: Tower) -> void:
 	selected_tower = tower
 	
@@ -20,3 +23,7 @@ func _on_function_input_text_changed(new_text: String) -> void:
 
 func _on_start_button_pressed() -> void:
 	$"../..".start_playing()
+
+func onGameStateChanged():
+	if !Globals.game_state==Globals.GameState.PLAYING:
+		visible=false

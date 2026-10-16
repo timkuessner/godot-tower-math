@@ -7,7 +7,7 @@ var type: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	Globals.gameStateChanged.connect(onGameStateChanged)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -30,3 +30,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		$".".modulate = Color(1, 0.5, 0.5)
 		
+func onGameStateChanged():
+	if !Globals.game_state==Globals.GameState.PLAYING:
+		visible=false

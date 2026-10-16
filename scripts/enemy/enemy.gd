@@ -28,6 +28,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if (Globals.game_state==Globals.GameState.WON):
+		return
 	progress += delta * speed * 0.4 if slowed else delta * speed		
 
 	# HP-Leiste waagerecht über dem Enemy halten

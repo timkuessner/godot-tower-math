@@ -211,6 +211,7 @@ size_flags_vertical = 3
 placeholder_text = "type your function"
 
 [node name="sell" type="Button" parent="TowerManager/MarginContainer/VBoxContainer" unique_id=1315442924]
+self_modulate = Color(3.294, 0.916, 0.916, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 text = " "
@@ -243,6 +244,7 @@ stretch_mode = 5
 layout_mode = 2
 
 [node name="apply" type="Button" parent="TowerManager/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1392305399]
+self_modulate = Color(0.916, 3.294, 0.916, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 text = " "
@@ -259,6 +261,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="cancel" type="Button" parent="TowerManager/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1387073756]
+self_modulate = Color(3.294, 0.916, 0.916, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 text = " "
@@ -335,6 +338,33 @@ icon = ExtResource("7_gts4l")
 flat = true
 icon_alignment = 1
 expand_icon = true
+
+[node name="ResultScreen" type="CenterContainer" parent="." unique_id=817507752]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.73200005
+anchor_bottom = 1.0
+offset_right = 0.039916992
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="ResultScreen" unique_id=994390682]
+custom_minimum_size = Vector2(500, 250)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="ResultScreen/Panel" unique_id=1430476707]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ResultScreen/Panel/CenterContainer" unique_id=590387505]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "You Won!"
 
 [connection signal="pressed" from="TowerManager/MarginContainer/VBoxContainer/Direction" to="." method="_on_direction_pressed"]
 [connection signal="text_changed" from="TowerManager/MarginContainer/VBoxContainer/HBoxContainer/Function" to="." method="_on_function_text_changed"]

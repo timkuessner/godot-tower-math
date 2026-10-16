@@ -5,22 +5,37 @@ signal towerSelected(index: int)
 
 var towerScene = preload("res://scenes/menus/Game/TowerButton.tscn")
 
+var playTextures := [
+	preload("res://assets/UI/pause.png"),
+	preload("res://assets/UI/play.png")
+]
+var speedTextures := [
+	preload("res://assets/UI/speed_x1.png"),
+	preload("res://assets/UI/speed_x2.png"),
+	preload("res://assets/UI/speed_x4.png")
+]
+
+@onready var resultScreen: CenterContainer = $ResultScreen
+@onready var resultLabel: Label = $ResultScreen/Panel/CenterContainer/Label
+@onready var bar: TextureProgressBar = $UpperLeft/MarginContainer/VBoxContainer/HBoxContainer/Base_hp_bar
+
+@onready var towerManager: Panel = $TowerManager
+@onready var directionButton: Button = $TowerManager/MarginContainer/VBoxContainer/Direction
+@onready var functionContainer: TextEdit = $TowerManager/MarginContainer/VBoxContainer/HBoxContainer/Function
+@onready var sellLabel: Label = $TowerManager/MarginContainer/VBoxContainer/sell/HBoxContainer/Label
+
+@onready var playButton: Button = $HBoxContainer/Running
+@onready var speedButton: Button = $HBoxContainer/Speed
+
 func _ready() -> void:
 	towerManager.visible = false
-	# hab leider keine besseren weg gefunden, die farben anzupassen
-	$TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/apply.modulate = Color(0.5, 1, 0.5)
-	$TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/apply/Label.modulate = Color(2,1,2)
-	$TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/cancel.modulate = Color(1, 0.5, 0.5)
-	$TowerManager/MarginContainer/VBoxContainer/HBoxContainer2/cancel/Label.modulate = Color(1,2,2)
-	
-	$TowerManager/MarginContainer/VBoxContainer/sell.modulate = Color(1, 0.5, 0.5)
-	$TowerManager/MarginContainer/VBoxContainer/sell/HBoxContainer/Label.modulate = Color(1,2,2)
-	$TowerManager/MarginContainer/VBoxContainer/sell/HBoxContainer/TextureRect.modulate = Color(1,2,2)
-
 	
 	Globals.money_changed.connect(onMoneyChanged)
 	Globals.maxHPChanged.connect(onMaxHPchanged)
 	Globals.hpChanged.connect(onHPchanged)
+	
+	Globals.gameStateChanged.connect(onGameStateChanged)
+	
 	for i in range(6):
 		var towerButton: Button = towerScene.instantiate()
 		towerButton.setType(i)
@@ -29,8 +44,6 @@ func _ready() -> void:
 
 func onMoneyChanged(value: int) -> void:
 	$LowerLeft/MarginContainer/VBoxContainer/HBoxContainer2/Label.text = str(value)
-
-@onready var bar: TextureProgressBar = $UpperLeft/MarginContainer/VBoxContainer/HBoxContainer/Base_hp_bar
 
 func onMaxHPchanged(value: float) -> void:
 	bar.max_value = value
@@ -44,12 +57,8 @@ func updateText():
 	$UpperLeft/MarginContainer/VBoxContainer/Label.text = str(bar.value) + "/" + str(bar.max_value) + " HP"
 
 func onTowerUIPressed(index: int) -> void:
-	towerSelected.emit(index)
-
-@onready var towerManager: Panel = $TowerManager
-@onready var directionButton: Button = $TowerManager/MarginContainer/VBoxContainer/Direction
-@onready var functionContainer: TextEdit = $TowerManager/MarginContainer/VBoxContainer/HBoxContainer/Function
-@onready var sellLabel: Label = $TowerManager/MarginContainer/VBoxContainer/sell/HBoxContainer/Label
+	if Globals.game_state==Globals.GameState.PLAYING:
+		towerSelected.emit(index)
 
 var tower: Tower
 
@@ -78,31 +87,17 @@ func _on_apply_pressed() -> void:
 	towerManager.visible = false
 
 func _on_cancel_pressed() -> void:
-	tower.text = tower.text
-	tower.showPreview = false
-	towerManager.visible = false
+	if tower!=null:
+		tower.showPreview = false
+		towerManager.visible = false
 
 func _on_sell_pressed() -> void:
 	Globals.money += tower.sellPrice
 	tower.queue_free()
 	towerManager.visible = false
 
-
 func _on_function_text_changed() -> void:
 	tower.previewText = functionContainer.text
-
-@onready var playButton: Button = $HBoxContainer/Running
-@onready var speedButton: Button = $HBoxContainer/Speed
-
-var playTextures := [
-	preload("res://assets/UI/pause.png"),
-	preload("res://assets/UI/play.png")
-]
-var speedTextures := [
-	preload("res://assets/UI/speed_x1.png"),
-	preload("res://assets/UI/speed_x2.png"),
-	preload("res://assets/UI/speed_x4.png")
-]
 
 var running := true:
 	set(value):
@@ -122,10 +117,36 @@ func updateEngineSpeed() -> void:
 		Engine.time_scale = 0
 
 func _on_running_pressed() -> void:
+	if !Globals.game_state==Globals.GameState.PLAYING: return
 	running = !running
 
 func _on_speed_pressed() -> void:
+	if !Globals.game_state==Globals.GameState.PLAYING: return
 	speed_state = (speed_state + 1) % 3
 
 func _on_exit_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menus/MainMenue.tscn")
+
+func onGameStateChanged():
+	if !Globals.game_state==Globals.GameState.PLAYING:
+		_on_cancel_pressed()
+		speed_state=0
+	if Globals.game_state==Globals.GameState.PLAYING:
+		resultScreen.visible=false
+	elif Globals.game_state==Globals.GameState.WON:
+		showResult("You won!")
+	elif Globals.game_state==Globals.GameState.LOST:
+		showResult("You lost!")
+
+var result_tween: Tween
+
+func showResult(text: String) -> void:
+	resultLabel.text = text
+	resultScreen.modulate.a = 0.0
+	resultScreen.visible=true
+
+	result_tween = create_tween()
+	result_tween.tween_interval(1.0)
+	result_tween.tween_callback(resultScreen.show)
+	result_tween.tween_property(resultScreen, "modulate:a", 1.0, 0.8) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)

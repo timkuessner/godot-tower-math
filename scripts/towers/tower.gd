@@ -101,9 +101,12 @@ func setType(index: int) -> void:
 	text = text
 
 func _on_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if !Globals.game_state==Globals.GameState.PLAYING:
+		return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			tower_clicked.emit(self)
 
 func _on_timer_timeout() -> void:
-	shoot()
+	if !Globals.game_state==Globals.GameState.LOST:
+		shoot()
