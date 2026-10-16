@@ -1,6 +1,14 @@
 class_name Level
 extends Node2D
 
+# Statische Referenz, um "Level.l.[...]" nutzen zu können
+static var c: Level
+func _enter_tree() -> void:
+	c = self
+func _exit_tree() -> void:
+	if c == self:
+		c = null
+
 const TOWER_SCENE := preload("res://scenes/towers/tower01.tscn")
 const ENEMY_TYPES = [
 	preload("res://scenes/enemy/enemy.tscn"),
@@ -27,13 +35,60 @@ const WAVES = [
 
 
 @export var level_number: int = 1
+
 @onready var path: Path2D = $enemy1_spawn/Path2D
 
+@onready var gameUI: GameUI = $CanvasLayer/GameUI
+
+# Old Globals ↓↓↓
+signal gameStateChanged()
+
+signal money_changed(value: int)
+signal hpChanged(value: int)
+signal maxHPChanged(value: int)
+
+enum GameState {
+	PLAYING,
+	WON,
+	LOST
+}
+
+var game_state := GameState.PLAYING:
+	set(value):
+		game_state = value
+		gameStateChanged.emit()
+
+var towers: Array = []
+
+@export var money := 200:
+	set(value):
+		money = value
+		money_changed.emit(money)
+
+@export var maxHP := 20:
+	set(value):
+		maxHP = value
+		maxHPChanged.emit(maxHP)
+
+var hp := 100:
+	set(value):
+		hp = max(value, 0)
+		hpChanged.emit(hp)
+		if hp == 0:
+			game_state = GameState.LOST
+# Old Globals ↑↑↑
+
+# Old Level ↓↓↓
 var tower_container: Node2D
 var enemy_container: Node2D
 var projectile_container: Node2D
 
+var selectedButton: int = -1
+
 func _ready() -> void:
+	var file := FileAccess.open("res://assets/towerSettings.json", FileAccess.READ)
+	towers = JSON.parse_string(file.get_as_text())
+	
 	create_runtime_containers()
 
 	$enemy1_spawn/EnemySpawner.stop()
@@ -42,9 +97,9 @@ func _ready() -> void:
 	start_waves()
 	
 	Globals.game_state = Globals.GameState.PLAYING
-	Globals.money = 20000
-	Globals.maxHP = 20
-	Globals.hp = Globals.maxHP
+	Globals.money = money
+	Globals.maxHP = maxHP
+	Globals.hp = maxHP
 	
 	add_child(towerGhost)
 	
@@ -148,11 +203,9 @@ func start_waves() -> void:
 
 	Globals.game_state = Globals.GameState.WON
 	print("SIEG! Alle Wellen geschafft!")
-
-@onready var gameUI: GameUI = $CanvasLayer/GameUI
-
-var towers: Array = []
-
+# Old Level ↑↑↑
+ 
+# Old Main ↓↓↓
 func start_playing() -> void:
 	Globals.game_state = Globals.GameState.PLAYING
 	
@@ -167,20 +220,17 @@ func _on_goal_area_entered(area: Area2D) -> void:
 	# Angekommenen Enemy entfernen
 	enemy.queue_free()
 
-# -1: nichts gewählt; positive oder nullwerte: towertyp gewählt
-var selected: int = -1
-
 var towerGhost: TowerGhost = load("res://scenes/towers/TowerGhost.tscn").instantiate()
 
 func onTowerButtonSelected(index: int) -> void:
-	if selected!=index :
-		selected = index
+	if selectedButton!=index :
+		selectedButton = index
 	else:
-		selected = -1
-	towerGhost.setType(selected)
+		selectedButton = -1
+	towerGhost.setType(selectedButton)
 
 func _process(delta: float) -> void:
-	var show := (selected != -1 and get_viewport().gui_get_hovered_control() == null)
+	var show := (selectedButton != -1 and get_viewport().gui_get_hovered_control() == null)
 	towerGhost.visible = show
 	if show:
 		towerGhost.global_position = get_global_mouse_position()
@@ -191,8 +241,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventMouseButton and event.pressed):
 		return
 	if event.button_index == MOUSE_BUTTON_LEFT and towerGhost.isValid:
-		spawn_tower(to_local(towerGhost.global_position), selected)
-		selected = -1
+		spawn_tower(to_local(towerGhost.global_position), selectedButton)
+		selectedButton = -1
 	elif event.button_index == MOUSE_BUTTON_RIGHT:
-		selected = -1
+		selectedButton = -1
 	get_viewport().set_input_as_handled()
+# Old Main ↑↑↑
