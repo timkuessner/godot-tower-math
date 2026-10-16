@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xn842hsfcnx6" path="res://scripts/level/level.gd" id="1_3n7h2"]
 [ext_resource type="Texture2D" uid="uid://cx0sqy3ue2823" path="res://assets/Level/level_01.png" id="2_msin7"]
+[ext_resource type="PackedScene" uid="uid://bf5yd53woqnrm" path="res://scenes/menus/Game/GameUI.tscn" id="3_g0jr5"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_3n7h2"]
 b = Vector2(0, 83)
@@ -209,4 +210,9 @@ polygon = PackedVector2Array(-574, -106, -563, -126, -549, -147, -537, -155, -52
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=145350569]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2083178235]
+
+[node name="GameUI" parent="CanvasLayer" unique_id=468380503 instance=ExtResource("3_g0jr5")]
+
 [connection signal="body_entered" from="GoalArea" to="." method="_on_base_body_entered"]
+[connection signal="towerSelected" from="CanvasLayer/GameUI" to="." method="onTowerButtonSelected"]

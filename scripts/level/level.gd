@@ -1,13 +1,12 @@
 class_name Level
 extends Node2D
 
-signal tower_selected(tower: Tower)
-
 const TOWER_SCENE := preload("res://scenes/towers/tower01.tscn")
 const ENEMY_TYPES = [
 	preload("res://scenes/enemy/enemy.tscn"),
 	preload("res://scenes/enemy/enemy_fast.tscn"),
-	preload("res://scenes/enemy/enemy_tank.tscn")]
+	preload("res://scenes/enemy/enemy_tank.tscn")
+]
 
 # Gegner pro Welle: [normale, schnelle, Tanks]
 # Spawnreihenfolge: normale → Tanks → schnelle
@@ -40,8 +39,18 @@ func _ready() -> void:
 	$enemy1_spawn/EnemySpawner.stop()
 	$enemy1_spawn/SpawnTimer.stop()
 
-	Globals.game_state = Globals.GameState.PLAYING
 	start_waves()
+	
+	Globals.game_state = Globals.GameState.PLAYING
+	Globals.money = 20000
+	Globals.maxHP = 20
+	Globals.hp = Globals.maxHP
+	
+	add_child(towerGhost)
+	
+	$GoalArea.area_entered.connect(
+		_on_goal_area_entered
+	)
 
 func create_runtime_containers() -> void:
 	tower_container = create_container("TowerContainer")
@@ -64,17 +73,15 @@ func spawn_tower(position: Vector2, type: int) -> Tower:
 	
 	tower_container.add_child(tower)
 	
-	tower.tower_clicked.connect(on_tower_selected)
+	tower.tower_clicked.connect(onRealTowerSelected)
 	
 	tower.setType(type)
 	
 	return tower
 
-func on_tower_selected(tower: Tower):
-	tower_selected.emit(tower)
-
-
-
+func onRealTowerSelected(tower: Tower):
+	print("test")
+	gameUI.loadTowerManager(tower)
 
 func spawn_enemy(type: int = 0) -> void:
 	if Globals.game_state != Globals.GameState.PLAYING: # Keine genger wenn game verloren
@@ -86,13 +93,19 @@ func spawn_enemy(type: int = 0) -> void:
 func spawn_group(number: int,interval: float,type: int = 0) -> void:
 	for i in range(number):
 		spawn_enemy(type)
-		await get_tree().create_timer(interval, false).timeout
-		
+		await wait(interval)
+
+func wait(seconds: float) -> void:
+	var timer := Timer.new()
+	timer.one_shot = true
+	add_child(timer)
+	timer.start(seconds)
+	await timer.timeout
+	timer.queue_free()
 
 func start_waves() -> void:
 	# Acht Sekunden Vorbereitung vor der ersten Welle.
-	await get_tree().create_timer(8.0, false).timeout
-
+	await wait(8) #Das habe ich gelassen, würde ich aber entfernen
 	for wave_index in range(WAVES.size()):
 		if Globals.game_state != Globals.GameState.PLAYING:
 			return
@@ -116,14 +129,14 @@ func start_waves() -> void:
 				return
 
 			spawn_enemy(type)
-			await get_tree().create_timer(interval, false).timeout
+			await wait(interval)
 
 		# Warten, bis alle Gegner dieser Welle weg sind.
 		while path.get_child_count() > 0:
 			if Globals.game_state != Globals.GameState.PLAYING:
 				return
 
-			await get_tree().create_timer(0.25, false).timeout
+			await wait(0.25)
 
 		if Globals.game_state != Globals.GameState.PLAYING:
 			return
@@ -131,7 +144,55 @@ func start_waves() -> void:
 		# Baupause vor der nächsten Welle.
 		if wave_index < WAVES.size() - 1:
 			print("Welle geschafft! Acht Sekunden Baupause.")
-			await get_tree().create_timer(8.0, false).timeout
+			await wait(8)
 
 	Globals.game_state = Globals.GameState.WON
 	print("SIEG! Alle Wellen geschafft!")
+
+@onready var gameUI: GameUI = $CanvasLayer/GameUI
+
+var towers: Array = []
+
+func start_playing() -> void:
+	Globals.game_state = Globals.GameState.PLAYING
+	
+#HP Bar_player
+func _on_goal_area_entered(area: Area2D) -> void:
+	if !area.get_parent() is Enemy:
+		return
+	var enemy: Enemy = area.get_parent()
+	if enemy.is_queued_for_deletion():
+		return
+	Globals.hp = maxi(Globals.hp - enemy.hp/5, 0)
+	# Angekommenen Enemy entfernen
+	enemy.queue_free()
+
+# -1: nichts gewählt; positive oder nullwerte: towertyp gewählt
+var selected: int = -1
+
+var towerGhost: TowerGhost = load("res://scenes/towers/TowerGhost.tscn").instantiate()
+
+func onTowerButtonSelected(index: int) -> void:
+	if selected!=index :
+		selected = index
+	else:
+		selected = -1
+	towerGhost.setType(selected)
+
+func _process(delta: float) -> void:
+	var show := (selected != -1 and get_viewport().gui_get_hovered_control() == null)
+	towerGhost.visible = show
+	if show:
+		towerGhost.global_position = get_global_mouse_position()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if !towerGhost.visible or !Globals.game_state==Globals.GameState.PLAYING:
+		return
+	if not (event is InputEventMouseButton and event.pressed):
+		return
+	if event.button_index == MOUSE_BUTTON_LEFT and towerGhost.isValid:
+		spawn_tower(to_local(towerGhost.global_position), selected)
+		selected = -1
+	elif event.button_index == MOUSE_BUTTON_RIGHT:
+		selected = -1
+	get_viewport().set_input_as_handled()
