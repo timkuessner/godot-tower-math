@@ -30,11 +30,11 @@ var speedTextures := [
 func _ready() -> void:
 	towerManager.visible = false
 	
-	Globals.money_changed.connect(onMoneyChanged)
-	Globals.maxHPChanged.connect(onMaxHPchanged)
-	Globals.hpChanged.connect(onHPchanged)
+	Level.c.money_changed.connect(onMoneyChanged)
+	Level.c.maxHPChanged.connect(onMaxHPchanged)
+	Level.c.hpChanged.connect(onHPchanged)
 	
-	Globals.gameStateChanged.connect(onGameStateChanged)
+	Level.c.gameStateChanged.connect(onGameStateChanged)
 	
 	for i in range(6):
 		var towerButton: Button = towerScene.instantiate()
@@ -57,7 +57,7 @@ func updateText():
 	$UpperLeft/MarginContainer/VBoxContainer/Label.text = str(bar.value) + "/" + str(bar.max_value) + " HP"
 
 func onTowerUIPressed(index: int) -> void:
-	if Globals.game_state==Globals.GameState.PLAYING:
+	if Level.c.game_state==Level.c.GameState.PLAYING:
 		towerSelected.emit(index)
 
 var tower: Tower
@@ -92,7 +92,7 @@ func _on_cancel_pressed() -> void:
 		towerManager.visible = false
 
 func _on_sell_pressed() -> void:
-	Globals.money += tower.sellPrice
+	Level.c.money += tower.sellPrice
 	tower.queue_free()
 	towerManager.visible = false
 
@@ -117,25 +117,25 @@ func updateEngineSpeed() -> void:
 		Engine.time_scale = 0
 
 func _on_running_pressed() -> void:
-	if !Globals.game_state==Globals.GameState.PLAYING: return
+	if !Level.c.game_state==Level.c.GameState.PLAYING: return
 	running = !running
 
 func _on_speed_pressed() -> void:
-	if !Globals.game_state==Globals.GameState.PLAYING: return
+	if !Level.c.game_state==Level.c.GameState.PLAYING: return
 	speed_state = (speed_state + 1) % 3
 
 func _on_exit_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menus/MainMenue.tscn")
 
 func onGameStateChanged():
-	if !Globals.game_state==Globals.GameState.PLAYING:
+	if !Level.c.game_state==Level.c.GameState.PLAYING:
 		_on_cancel_pressed()
 		speed_state=0
-	if Globals.game_state==Globals.GameState.PLAYING:
+	if Level.c.game_state==Level.c.GameState.PLAYING:
 		resultScreen.visible=false
-	elif Globals.game_state==Globals.GameState.WON:
+	elif Level.c.game_state==Level.c.GameState.WON:
 		showResult("You won!")
-	elif Globals.game_state==Globals.GameState.LOST:
+	elif Level.c.game_state==Level.c.GameState.LOST:
 		showResult("You lost!")
 
 var result_tween: Tween

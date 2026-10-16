@@ -7,7 +7,7 @@ var price := 0
 
 func setDisabled(value: bool) -> void:
 	disabled = value
-	if !Globals.game_state==Globals.GameState.PLAYING:
+	if !Level.c.game_state==Level.c.GameState.PLAYING:
 		disabled=true
 	material.set_shader_parameter("strength", 1.0 if value else 0.0)
 
@@ -18,8 +18,8 @@ func onMoneyChanged(value: int) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	material = material.duplicate()
-	Globals.money_changed.connect(onMoneyChanged)
-	Globals.gameStateChanged.connect(onGameStateChanged)
+	Level.c.money_changed.connect(onMoneyChanged)
+	Level.c.gameStateChanged.connect(onGameStateChanged)
 	pass
 
 func setType(index: int) -> void:
@@ -36,5 +36,5 @@ func setType(index: int) -> void:
 		setDisabled(true)
 
 func onGameStateChanged():
-	if !Globals.game_state==Globals.GameState.PLAYING:
+	if !Level.c.game_state==Level.c.GameState.PLAYING:
 		setDisabled(true)

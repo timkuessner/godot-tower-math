@@ -11,7 +11,7 @@ func _ready() -> void:
 	
 
 func spawn_enemy():
-	if Globals.game_state == Globals.GameState.WON:
+	if Level.c.game_state == Level.c.GameState.WON:
 		return
 	var enemy = ENEMY_SCENE.instantiate()
 	path.add_child(enemy)

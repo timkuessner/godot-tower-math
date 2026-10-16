@@ -94,19 +94,19 @@ func setType(index: int) -> void:
 	$Sprite2D.texture = texture
 	function_length = data["range"]
 	sellPrice = data["sell_price"]
-	Globals.money -= data["price"]
+	Level.c.money -= data["price"]
 	rotateTexture = data["rotate_texture"]
 	projectile_scene = load(data["projectile_scene"])
 	timer.wait_time = 1./data["fire_rate"]
 	text = text
 
 func _on_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if !Globals.game_state==Globals.GameState.PLAYING:
+	if !Level.c.game_state==Level.c.GameState.PLAYING:
 		return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			tower_clicked.emit(self)
 
 func _on_timer_timeout() -> void:
-	if !Globals.game_state==Globals.GameState.LOST:
+	if !Level.c.game_state==Level.c.GameState.LOST:
 		shoot()

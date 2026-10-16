@@ -28,7 +28,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if (Globals.game_state==Globals.GameState.WON):
+	if (Level.c.game_state==Level.c.GameState.WON):
 		return
 	progress += delta * speed * 0.4 if slowed else delta * speed		
 
@@ -48,7 +48,7 @@ func handleDamage(amount: float) -> bool:
 
 	if hp <= 0:
 		queue_free()
-		Globals.money += value
+		Level.c.money += value
 	return true
 
 func _on_slow_timer_timeout() -> void:

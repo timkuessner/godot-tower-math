@@ -58,8 +58,6 @@ var game_state := GameState.PLAYING:
 		game_state = value
 		gameStateChanged.emit()
 
-var towers: Array = []
-
 @export var money := 200:
 	set(value):
 		money = value
@@ -86,9 +84,6 @@ var projectile_container: Node2D
 var selectedButton: int = -1
 
 func _ready() -> void:
-	var file := FileAccess.open("res://assets/towerSettings.json", FileAccess.READ)
-	towers = JSON.parse_string(file.get_as_text())
-	
 	create_runtime_containers()
 
 	$enemy1_spawn/EnemySpawner.stop()
@@ -96,10 +91,10 @@ func _ready() -> void:
 
 	start_waves()
 	
-	Globals.game_state = Globals.GameState.PLAYING
-	Globals.money = money
-	Globals.maxHP = maxHP
-	Globals.hp = maxHP
+	game_state = GameState.PLAYING
+	money = money
+	maxHP = maxHP
+	hp = maxHP
 	
 	add_child(towerGhost)
 	
@@ -139,7 +134,7 @@ func onRealTowerSelected(tower: Tower):
 	gameUI.loadTowerManager(tower)
 
 func spawn_enemy(type: int = 0) -> void:
-	if Globals.game_state != Globals.GameState.PLAYING: # Keine genger wenn game verloren
+	if game_state != GameState.PLAYING: # Keine genger wenn game verloren
 		return
 	var enemy: Enemy = ENEMY_TYPES[type].instantiate()
 	path.add_child(enemy)
@@ -162,7 +157,7 @@ func start_waves() -> void:
 	# Acht Sekunden Vorbereitung vor der ersten Welle.
 	await wait(8) #Das habe ich gelassen, würde ich aber entfernen
 	for wave_index in range(WAVES.size()):
-		if Globals.game_state != Globals.GameState.PLAYING:
+		if game_state != GameState.PLAYING:
 			return
 
 		print("Welle ", wave_index + 1, " / ", WAVES.size())
@@ -180,7 +175,7 @@ func start_waves() -> void:
 
 		# Gegner in der festgelegten Reihenfolge erzeugen.
 		for type in spawn_order:
-			if Globals.game_state != Globals.GameState.PLAYING:
+			if game_state != GameState.PLAYING:
 				return
 
 			spawn_enemy(type)
@@ -188,12 +183,12 @@ func start_waves() -> void:
 
 		# Warten, bis alle Gegner dieser Welle weg sind.
 		while path.get_child_count() > 0:
-			if Globals.game_state != Globals.GameState.PLAYING:
+			if game_state != GameState.PLAYING:
 				return
 
 			await wait(0.25)
 
-		if Globals.game_state != Globals.GameState.PLAYING:
+		if game_state != GameState.PLAYING:
 			return
 
 		# Baupause vor der nächsten Welle.
@@ -201,13 +196,13 @@ func start_waves() -> void:
 			print("Welle geschafft! Acht Sekunden Baupause.")
 			await wait(8)
 
-	Globals.game_state = Globals.GameState.WON
+	game_state = GameState.WON
 	print("SIEG! Alle Wellen geschafft!")
 # Old Level ↑↑↑
  
 # Old Main ↓↓↓
 func start_playing() -> void:
-	Globals.game_state = Globals.GameState.PLAYING
+	game_state = GameState.PLAYING
 	
 #HP Bar_player
 func _on_goal_area_entered(area: Area2D) -> void:
@@ -216,7 +211,7 @@ func _on_goal_area_entered(area: Area2D) -> void:
 	var enemy: Enemy = area.get_parent()
 	if enemy.is_queued_for_deletion():
 		return
-	Globals.hp = maxi(Globals.hp - enemy.hp/5, 0)
+	hp = maxi(hp - enemy.hp/5, 0)
 	# Angekommenen Enemy entfernen
 	enemy.queue_free()
 
@@ -236,7 +231,7 @@ func _process(delta: float) -> void:
 		towerGhost.global_position = get_global_mouse_position()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if !towerGhost.visible or !Globals.game_state==Globals.GameState.PLAYING:
+	if !towerGhost.visible or !game_state==GameState.PLAYING:
 		return
 	if not (event is InputEventMouseButton and event.pressed):
 		return

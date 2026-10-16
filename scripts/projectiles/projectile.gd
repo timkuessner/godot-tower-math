@@ -13,7 +13,7 @@ func setup(p: PackedVector2Array) -> void:
 	if path.size() < 2:
 		queue_free()
 	_process(0)
-	Globals.gameStateChanged.connect(onGameStateChanged)
+	Level.c.gameStateChanged.connect(onGameStateChanged)
 
 # Beide Variablen zusammen geben die bisherige Bewegung auf dem Pfad eindeutig an
 var currentElement: int = 0
@@ -43,5 +43,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		queue_free()
 	
 func onGameStateChanged() -> void:
-	if Globals.game_state==Globals.GameState.LOST:
+	if Level.c.game_state==Level.c.GameState.LOST:
 		queue_free()
