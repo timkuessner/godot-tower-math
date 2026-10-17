@@ -4,5 +4,5 @@
 
 [node name="Levels01" unique_id=728506507 instance=ExtResource("1_mwu3q")]
 level_number = -1
-money = 100000
+money = 1000000000
 maxHP = 1

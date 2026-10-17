@@ -91,7 +91,6 @@ func _ready() -> void:
 
 	start_waves()
 	
-	game_state = GameState.PLAYING
 	money = money
 	maxHP = maxHP
 	hp = maxHP
@@ -194,15 +193,11 @@ func start_waves() -> void:
 		if wave_index < WAVES.size() - 1:
 			print("Welle geschafft! Acht Sekunden Baupause.")
 			await wait(8)
-
 	game_state = GameState.WON
 	print("SIEG! Alle Wellen geschafft!")
 # Old Level ↑↑↑
  
 # Old Main ↓↓↓
-func start_playing() -> void:
-	game_state = GameState.PLAYING
-	
 #HP Bar_player
 func _on_goal_area_entered(area: Area2D) -> void:
 	if !area.get_parent() is Enemy:

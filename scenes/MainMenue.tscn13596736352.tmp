@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://c7krsr5f4any6"]
+
+[ext_resource type="Script" uid="uid://b677fmku6g370" path="res://scripts/menus/main_menu.gd" id="1_lyo40"]
+[ext_resource type="Texture2D" uid="uid://ufootpy8fspb" path="res://assets/menu_background.png" id="2_y4mcm"]
+
+[node name="MainMenue" type="Control" unique_id=1873854004]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lyo40")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1487594577]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_y4mcm")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1732695116]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Elements" type="Control" parent="MarginContainer" unique_id=1755999482]
+layout_mode = 2
+
+[node name="LevelContainer" type="VBoxContainer" parent="MarginContainer/Elements" unique_id=2115413830]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = -127.0
+offset_right = 146.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tutorial" type="Button" parent="MarginContainer/Elements/LevelContainer" unique_id=1506003640]
+layout_mode = 2
+text = "Tutorial"
+
+[node name="Level1" type="Button" parent="MarginContainer/Elements/LevelContainer" unique_id=1200175789]
+layout_mode = 2
+text = "Level 1"
+
+[node name="Level2" type="Button" parent="MarginContainer/Elements/LevelContainer" unique_id=1121427511]
+layout_mode = 2
+text = "Level 2"
+
+[node name="Level3" type="Button" parent="MarginContainer/Elements/LevelContainer" unique_id=1721375215]
+layout_mode = 2
+text = "Level 3"
+
+[node name="Level4" type="Button" parent="MarginContainer/Elements/LevelContainer" unique_id=890657883]
+layout_mode = 2
+text = "Level 4"
+
+[node name="Level5" type="Button" parent="MarginContainer/Elements/LevelContainer" unique_id=704988367]
+layout_mode = 2
+text = "Level 5"
+
+[node name="CreativeMode" type="Button" parent="MarginContainer/Elements/LevelContainer" unique_id=143656382]
+layout_mode = 2
+text = "CreativeMode"

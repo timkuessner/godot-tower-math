@@ -152,6 +152,8 @@ func onGameStateChanged():
 var result_tween: Tween
 
 func showResult(text: String) -> void:
+	if resultScreen.visible:
+		return
 	resultLabel.text = text
 	resultScreen.modulate.a = 0.0
 	resultScreen.visible=true

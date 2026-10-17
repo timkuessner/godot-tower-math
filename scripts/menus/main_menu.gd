@@ -1,11 +1,22 @@
+class_name MainMenue
 extends Control
 
-func _on_play_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/levels/Level01.tscn")
+var levels := [
+	"res://scenes/levels/LevelTutorial.tscn",
+	"res://scenes/levels/Level01.tscn",
+	"res://scenes/levels/Level02.tscn",
+	"res://scenes/levels/Level03.tscn",
+	"res://scenes/levels/Level04.tscn",
+	"res://scenes/levels/Level05.tscn",
+	"res://scenes/levels/LevelDev.tscn",
+]
 
-func _on_option_button_pressed() -> void:
-	pass # Replace with function body.
+func onPlayLevelPressed(index: int) -> void:
+	if index == -1: index = levels.size() - 1
+	get_tree().change_scene_to_file(levels[index])
 
+func onOptionPressed() -> void:
+	print("onOptionPressed")
 
-func _on_quit_button_pressed() -> void:
+func onQuitPressed() -> void:
 	get_tree().quit()
