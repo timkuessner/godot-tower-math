@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 func handleDamage(amount: float) -> bool:
 	if is_queued_for_deletion():
 		return false
-	hp = maxi(hp - amount, 0)
+	hp = hp - amount if hp > 0. else 0.
 	hp_bar.value = hp
 	texture_progress_bar.value = hp
 

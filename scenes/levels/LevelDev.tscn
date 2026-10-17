@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ynum24rohaju"]
+
+[ext_resource type="PackedScene" uid="uid://c8s3p812b7yok" path="res://scenes/Level.tscn" id="1_mwu3q"]
+
+[node name="Levels01" unique_id=728506507 instance=ExtResource("1_mwu3q")]
+level_number = -1
+money = 100000
+maxHP = 1

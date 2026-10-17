@@ -54,7 +54,7 @@
 		"price": 350,
 		"sell_price": 210,
 		"domain": "real",
-		"range": 20,
+		"range": 40,
 		"fire_rate": 0.3,
 		"projectile_scene" : "res://scenes/projectiles/sniperProjectile.tscn",
 		"tooltip": "Sniper\nExtreme range.\nVery high damage to one enemy.\nSlow to reload."

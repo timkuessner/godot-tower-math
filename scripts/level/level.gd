@@ -9,7 +9,7 @@ func _exit_tree() -> void:
 	if c == self:
 		c = null
 
-const TOWER_SCENE := preload("res://scenes/towers/tower01.tscn")
+const TOWER_SCENE := preload("res://scenes/towers/Tower.tscn")
 const ENEMY_TYPES = [
 	preload("res://scenes/enemy/enemy.tscn"),
 	preload("res://scenes/enemy/enemy_fast.tscn"),
@@ -116,10 +116,10 @@ func create_container(container_name: String) -> Node2D:
 	return container
 
 
-func spawn_tower(position: Vector2, type: int) -> Tower:	
+func spawn_tower(p: Vector2, type: int) -> Tower:	
 	var tower: Tower = TOWER_SCENE.instantiate()
 	
-	tower.position = position
+	tower.position = p
 	
 	tower_container.add_child(tower)
 	
@@ -130,7 +130,6 @@ func spawn_tower(position: Vector2, type: int) -> Tower:
 	return tower
 
 func onRealTowerSelected(tower: Tower):
-	print("test")
 	gameUI.loadTowerManager(tower)
 
 func spawn_enemy(type: int = 0) -> void:
@@ -211,7 +210,7 @@ func _on_goal_area_entered(area: Area2D) -> void:
 	var enemy: Enemy = area.get_parent()
 	if enemy.is_queued_for_deletion():
 		return
-	hp = maxi(hp - enemy.hp/5, 0)
+	hp = maxi(hp - enemy.hp/5, 0.)
 	# Angekommenen Enemy entfernen
 	enemy.queue_free()
 

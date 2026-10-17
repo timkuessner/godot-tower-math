@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c7krsr5f4any6"]
 
-[ext_resource type="Script" uid="uid://b677fmku6g370" path="res://scripts/menus/main_menu.gd" id="1_l3edi"]
+[ext_resource type="Script" uid="uid://b677fmku6g370" path="res://scripts/menus/main_menu.gd" id="1_lyo40"]
+[ext_resource type="Texture2D" uid="uid://ufootpy8fspb" path="res://assets/menu_background.png" id="2_y4mcm"]
 
 [node name="MainMenue" type="Control" unique_id=1873854004]
 layout_mode = 3
@@ -9,7 +10,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_l3edi")
+script = ExtResource("1_lyo40")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1487594577]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_y4mcm")
+expand_mode = 3
+stretch_mode = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1140282612]
 layout_mode = 1
@@ -37,6 +50,20 @@ text = "Options"
 [node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=909410970]
 layout_mode = 2
 text = "Quit"
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=316210095]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = 174.0
+offset_right = 318.0
+offset_bottom = 426.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]

@@ -3,7 +3,7 @@ extends Control
 
 signal towerSelected(index: int)
 
-var towerScene = preload("res://scenes/menus/Game/TowerButton.tscn")
+var towerScene = preload("res://scenes/towers/TowerButton.tscn")
 
 var playTextures := [
 	preload("res://assets/UI/pause.png"),
@@ -15,17 +15,25 @@ var speedTextures := [
 	preload("res://assets/UI/speed_x4.png")
 ]
 
-@onready var resultScreen: CenterContainer = $ResultScreen
-@onready var resultLabel: Label = $ResultScreen/Panel/CenterContainer/Label
-@onready var bar: TextureProgressBar = $UpperLeft/MarginContainer/VBoxContainer/HBoxContainer/Base_hp_bar
+@onready var resultScreen: CenterContainer = $HBoxContainer2/ContentArea/ResultScreen
+@onready var resultLabel: Label = $HBoxContainer2/ContentArea/ResultScreen/Panel/MarginContainer/VBoxContainer/CenterContainer/Label
 
-@onready var towerManager: Panel = $TowerManager
-@onready var directionButton: Button = $TowerManager/MarginContainer/VBoxContainer/Direction
-@onready var functionContainer: TextEdit = $TowerManager/MarginContainer/VBoxContainer/HBoxContainer/Function
-@onready var sellLabel: Label = $TowerManager/MarginContainer/VBoxContainer/sell/HBoxContainer/Label
+@onready var exitDialog: CenterContainer = $HBoxContainer2/ContentArea/ExitDialog
 
-@onready var playButton: Button = $HBoxContainer/Running
-@onready var speedButton: Button = $HBoxContainer/Speed
+@onready var moneyLabel: Label = $HBoxContainer2/ContentArea/Content/LowerLeft/HBoxContainer2/Label
+
+@onready var hpLabel: Label = $HBoxContainer2/ContentArea/Content/UpperLeft/Label
+@onready var bar: TextureProgressBar = $HBoxContainer2/ContentArea/Content/UpperLeft/HBoxContainer/Base_hp_bar
+
+@onready var towerManager: Panel = $HBoxContainer2/ContentArea/Content/TowerManager
+@onready var directionButton: Button = $HBoxContainer2/ContentArea/Content/TowerManager/MarginContainer/VBoxContainer/Direction
+@onready var functionContainer: TextEdit = $HBoxContainer2/ContentArea/Content/TowerManager/MarginContainer/VBoxContainer/HBoxContainer/Function
+@onready var sellLabel: Label = $HBoxContainer2/ContentArea/Content/TowerManager/MarginContainer/VBoxContainer/sell/HBoxContainer/Label
+
+@onready var playButton: Button = $HBoxContainer2/ContentArea/Content/LowerRight/Play
+@onready var speedButton: Button = $HBoxContainer2/ContentArea/Content/LowerRight/Speed
+
+@onready var towerGrid: GridContainer = $HBoxContainer2/RightBar/Margin/VBoxContainer/ScrollContainer/GridContainer
 
 func _ready() -> void:
 	towerManager.visible = false
@@ -40,10 +48,10 @@ func _ready() -> void:
 		var towerButton: Button = towerScene.instantiate()
 		towerButton.setType(i)
 		towerButton.pressed.connect(onTowerUIPressed.bind(i))
-		$SideBar/Margin/VBoxContainer/ScrollContainer/GridContainer.add_child(towerButton)	
+		towerGrid.add_child(towerButton)	
 
 func onMoneyChanged(value: int) -> void:
-	$LowerLeft/MarginContainer/VBoxContainer/HBoxContainer2/Label.text = str(value)
+	moneyLabel.text = str(value)
 
 func onMaxHPchanged(value: float) -> void:
 	bar.max_value = value
@@ -54,7 +62,7 @@ func onHPchanged(value: float) -> void:
 	updateText()
 
 func updateText():
-	$UpperLeft/MarginContainer/VBoxContainer/Label.text = str(bar.value) + "/" + str(bar.max_value) + " HP"
+	hpLabel.text = str(bar.value) + "/" + str(bar.max_value) + " HP"
 
 func onTowerUIPressed(index: int) -> void:
 	if Level.c.game_state==Level.c.GameState.PLAYING:
@@ -124,8 +132,11 @@ func _on_speed_pressed() -> void:
 	if !Level.c.game_state==Level.c.GameState.PLAYING: return
 	speed_state = (speed_state + 1) % 3
 
+func onExitDialogPressed() -> void:
+	exitDialog.visible = true
+
 func _on_exit_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/menus/MainMenue.tscn")
+	get_tree().change_scene_to_file("res://scenes/MainMenue.tscn")
 
 func onGameStateChanged():
 	if !Level.c.game_state==Level.c.GameState.PLAYING:
@@ -150,3 +161,6 @@ func showResult(text: String) -> void:
 	result_tween.tween_callback(resultScreen.show)
 	result_tween.tween_property(resultScreen, "modulate:a", 1.0, 0.8) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+func onExitDialogCancelPressed() -> void:
+	exitDialog.visible = false

@@ -7,7 +7,7 @@
 size = Vector2(215.00024, 60.000053)
 
 [node name="SniperProjectile" unique_id=916805144 instance=ExtResource("1_ncbfi")]
-damage = 10.0
+damage = 25.0
 
 [node name="Sprite2D" parent="." index="0" unique_id=648682641]
 scale = Vector2(1.5, 1.4999998)

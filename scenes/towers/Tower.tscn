@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://561wxlbi5qjy"]
 
-[ext_resource type="Script" uid="uid://diobth0jyjl6r" path="res://scripts/towers/tower.gd" id="1_camsk"]
-[ext_resource type="Texture2D" uid="uid://dw28lsxh3w677" path="res://assets/Tower/shooter.png" id="4_sde0f"]
+[ext_resource type="Script" uid="uid://diobth0jyjl6r" path="res://scripts/towers/tower.gd" id="1_8udu1"]
+[ext_resource type="Texture2D" uid="uid://dw28lsxh3w677" path="res://assets/Tower/shooter.png" id="2_qn1rk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b2whu"]
 radius = 32.0
@@ -10,13 +10,13 @@ radius = 32.0
 radius = 24.0
 
 [node name="Tower" type="Node2D" unique_id=894846402]
-script = ExtResource("1_camsk")
+script = ExtResource("1_8udu1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=621392798]
 position = Vector2(9.536743e-07, 9.536743e-07)
 rotation = -6.2831855
 scale = Vector2(0.625, 0.625)
-texture = ExtResource("4_sde0f")
+texture = ExtResource("2_qn1rk")
 
 [node name="ClickArea" type="Area2D" parent="." unique_id=847376116]
 collision_layer = 4
